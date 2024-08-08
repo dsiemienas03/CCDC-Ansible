@@ -1,5 +1,5 @@
 ---
-- name: Inbound-block-sql
+- name: palo-critical | Inbound-block-sql
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-sql
@@ -14,7 +14,7 @@
     log_end: true
     tag_name: [Critical]
 
-- name: Inbound-block-vmware
+- name: palo-critical | Inbound-block-vmware
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-vmware
@@ -30,7 +30,7 @@
     tag_name: [Critical]
     disabled: true
 
-- name: Inbound block active directory
+- name: palo-critical | Inbound block active directory
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-dc
@@ -44,9 +44,9 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
-    
 
-- name: Allow DC access to DNS
+
+- name: palo-critical | Allow DC access to DNS
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-dc-dns
@@ -65,7 +65,7 @@
 
 
 # Allow all traffic
-- name: Allow all traffic in
+- name: palo-critical | Allow all traffic in
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-all
@@ -80,7 +80,7 @@
     log_end: true
     tag_name: [Critical, ALLOW ALL]
 
-- name: Allow web outbound
+- name: palo-critical | Allow web outbound
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-web
@@ -95,7 +95,7 @@
     log_end: true
     tag_name: [Critical]
 
-- name: Block DNS outbound
+- name: palo-critical | Block DNS outbound
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-dns
@@ -110,7 +110,7 @@
     log_end: true
     tag_name: [Critical]
 
-- name: Allow all traffic out
+- name: palo-critical | Allow all traffic out
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-all
@@ -125,7 +125,7 @@
     log_end: true
     tag_name: [Critical, ALLOW ALL]
 
-- name: Add windows server rules
+- name: palo-critical | Add windows server rules
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: lan-winsrv
@@ -140,7 +140,7 @@
     log_end: true
     tag_name: [Critical]
 
-- name: Add outbound block rule
+- name: palo-critical | Add outbound block rule
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-block-all
@@ -155,7 +155,7 @@
     log_end: true
     tag_name: [Critical, BLOCK ALL]
 
-- name: Add windows WAN block server rules
+- name: palo-critical | Add windows WAN block server rules
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: wan-win-srv
@@ -172,7 +172,7 @@
     log_end: true
     tag_name: [Critical]
 
-- name: Add inbound block rule
+- name: palo-critical | Add inbound block rule
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-block-all
@@ -188,7 +188,7 @@
     tag_name: [Critical, BLOCK ALL]
 
 # Safety rule
-- name: Inbound safety
+- name: palo-critical | Inbound safety
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-safety
@@ -205,7 +205,7 @@
     log_end: true
     tag_name: [Critical]
 
-# - name: Set initial rules as done
+# - name: palo-critical | Set initial rules as done
 #   set_fact:
 #     config_initial_rules: "n"
 #     cacheable: true

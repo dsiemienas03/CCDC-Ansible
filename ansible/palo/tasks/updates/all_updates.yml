@@ -1,12 +1,12 @@
 ---
-- name: Update anti-virus
+- name: all_updates | Update anti-virus
   ansible.builtin.import_tasks: av_update.yml
   when: update_other == "y"
 
-- name: Update content
+- name: all_updates | Update content
   ansible.builtin.import_tasks: content_update.yml
   when: update_other == "y"
 
-- name: Update wildfire
+- name: all_updates | Update wildfire
   ansible.builtin.import_tasks: wildfire_update.yml
   when: update_other == "y"

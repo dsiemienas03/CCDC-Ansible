@@ -1,5 +1,5 @@
 ---
-- name: Download PAN-OS Major version
+- name: install_panos_version | Download PAN-OS Major version
   paloaltonetworks.panos.panos_software:
     provider: "{{ provider }}"
     version: "{{ major_version }}"
@@ -7,7 +7,7 @@
     restart: false
   when: current_major != major_version
 
-- name: Install PAN-OS Minor version and Reboot
+- name: install_panos_version | Install PAN-OS Minor version and Reboot
   paloaltonetworks.panos.panos_software:
     provider: "{{ provider }}"
     version: "{{ code_revisions.get(major_version) }}"
@@ -15,13 +15,13 @@
     restart: true
   register: install_result
 
-- name: Notify Reboot Handler
+- name: install_panos_version | Notify Reboot Handler
   command: echo "Wait for Device Reboot"
   notify: reboot
 
-- name: Pause for Restart Checks
+- name: install_panos_version | Pause for Restart Checks
   pause:
     seconds: 10
 
-- name: Wait for Online Handler
+- name: install_panos_version | Wait for Online Handler
   meta: flush_handlers
