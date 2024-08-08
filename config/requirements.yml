@@ -1,7 +1,7 @@
 ---
 collections:
-  - name: paloaltonetworks.panos
   # Palo
+  - name: paloaltonetworks.panos
   # pfSense
   - name: pfsensible.core
   # - name: vbotka.freebsd_pf
