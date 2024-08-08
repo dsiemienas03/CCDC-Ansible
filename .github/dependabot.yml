@@ -11,7 +11,6 @@ updates:
       interval: "daily"
     labels:
       - docker
-      - github_actions
       - dependabot
     reviewers:
       - "dsiemienas03"
@@ -24,7 +23,6 @@ updates:
       interval: "daily"
     labels:
       - pip
-      - github_actions
       - dependabot
     reviewers:
       - "dsiemienas03"
@@ -37,7 +35,6 @@ updates:
       interval: "daily"
     labels:
       - gitsubmodule
-      - github_actions
       - dependabot
     reviewers:
       - "dsiemienas03"
