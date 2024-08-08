@@ -13,13 +13,13 @@ categories:
   - title: '🔒 Security'
     labels:
       - 'security'
+  - title: 'Submodule Updates'
+    labels:
+      - 'gitsubmodule'
   - title: '🧰 Maintenance'
     labels: 
       - 'chore'
       - 'dependabot'
-  - title: 'Submodule Updates'
-    labels:
-      - 'gitsubmodule'
   
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
