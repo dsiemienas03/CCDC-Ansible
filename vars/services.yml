@@ -1,357 +1,405 @@
 services:
-  esx1: 
+  esx1:
     ip: 20
     fw: 0
     service: esx
-  esx2: 
+
+  esx2:
     ip: 0
     fw: 0
     service: esx
-  esx3: 
+
+  esx3:
     ip: 0
     fw: 0
     service: esx
-  esx4: 
+
+  esx4:
     ip: 0
     fw: 0
     service: esx
-  esx5: 
+
+  esx5:
     ip: 0
     fw: 0
     service: esx
-  esx6: 
+
+  esx6:
     ip: 0
     fw: 0
     service: esx
 
   # Windows DCs
-  dc1: 
+  dc1:
     ip: 0
     fw: 0
     service: dc
-  dc2: 
+
+  dc2:
     ip: 0
     fw: 0
     service: dc
-  dc3: 
+
+  dc3:
     ip: 0
     fw: 0
     service: dc
-  dc4: 
+
+  dc4:
     ip: 0
     fw: 0
     service: dc
-  dc5: 
+
+  dc5:
     ip: 0
     fw: 0
     service: dc
-  dc6: 
+
+  dc6:
     ip: 0
     fw: 0
     service: dc
-  dc7: 
+
+  dc7:
     ip: 0
     fw: 0
     service: dc
-  dc8: 
+
+  dc8:
     ip: 0
     fw: 0
     service: dc
-  dc9: 
+
+  dc9:
     ip: 0
     fw: 0
     service: dc
-  dc10: 
+
+  dc10:
     ip: 0
     fw: 0
     service: dc
 
   # DNS
-  dns1: 
+  dns1:
     ip: 0
     fw: 0
     service: dns
-  dns2: 
+
+  dns2:
     ip: 0
     fw: 0
     service: dns
-  dns3: 
+
+  dns3:
     ip: 0
     fw: 0
     service: dns
-  dns4: 
+
+  dns4:
     ip: 0
     fw: 0
     service: dns
-  dns5: 
+
+  dns5:
     ip: 0
     fw: 0
     service: dns
-  dns6: 
+
+  dns6:
     ip: 0
     fw: 0
     service: dns
-  dns7: 
+
+  dns7:
     ip: 0
     fw: 0
     service: dns
-  dns8: 
+
+  dns8:
     ip: 0
     fw: 0
     service: dns
-  dns9: 
+
+  dns9:
     ip: 0
     fw: 0
     service: dns
-  dns10: 
+
+  dns10:
     ip: 0
     fw: 0
     service: dns
 
   # SSH
-  ssh1: 
+  ssh1:
     ip: 0
     fw: 0
     service: ssh
-  ssh2: 
+
+  ssh2:
     ip: 0
     fw: 0
     service: ssh
-  ssh3: 
+
+  ssh3:
     ip: 0
     fw: 0
     service: ssh
-  ssh4: 
+
+  ssh4:
     ip: 0
     fw: 0
     service: ssh
-  ssh5: 
+
+  ssh5:
     ip: 0
     fw: 0
     service: ssh
-  ssh6: 
+
+  ssh6:
     ip: 0
     fw: 0
     service: ssh
-  ssh7: 
+
+  ssh7:
     ip: 0
     fw: 0
     service: ssh
-  ssh8: 
+
+  ssh8:
     ip: 0
     fw: 0
     service: ssh
-  ssh9: 
+
+  ssh9:
     ip: 0
     fw: 0
     service: ssh
-  ssh10: 
+
+  ssh10:
     ip: 0
     fw: 0
     service: ssh
 
   # POP3
-  pop1: 
+
+  pop1:
     ip: 0
     fw: 0
     service: pop
-  pop2: 
+
+  pop2:
     ip: 0
     fw: 0
     service: pop
-  pop3: 
+
+  pop3:
     ip: 0
     fw: 0
     service: pop
-  pop4: 
+
+  pop4:
     ip: 0
     fw: 0
     service: pop
-  pop5: 
+
+  pop5:
     ip: 0
     fw: 0
     service: pop
 
   # SMTP
-  smtp1: 
+  smtp1:
     ip: 0
     fw: 0
     service: smtp
-  smtp2: 
+
+  smtp2:
     ip: 0
     fw: 0
     service: smtp
-  smtp3: 
+
+  smtp3:
     ip: 0
     fw: 0
     service: smtp
-  smtp4: 
+
+  smtp4:
     ip: 0
     fw: 0
     service: smtp
-  smtp5: 
+
+  smtp5:
     ip: 0
     fw: 0
     service: smtp
 
   # HTTP
-  http1: 
+  http1:
     ip: 0
     fw: 0
     service: http
-  http2: 
+
+  http2:
     ip: 0
     fw: 0
     service: http
-  http3: 
+
+  http3:
     ip: 0
     fw: 0
     service: http
-  http4: 
+
+  http4:
     ip: 0
     fw: 0
     service: http
-  http5: 
+
+  http5:
     ip: 0
     fw: 0
     service: http
-  http6: 
+
+  http6:
     ip: 0
     fw: 0
     service: http
-  http7: 
+
+  http7:
     ip: 0
     fw: 0
     service: http
-  http8: 
+
+  http8:
     ip: 0
     fw: 0
     service: http
-  http9: 
+  http9:
     ip: 0
     fw: 0
     service: http
-  http10: 
+  http10:
     ip: 0
     fw: 0
     service: http
-  http11: 
+  http11:
     ip: 0
     fw: 0
     service: http
-  http12: 
+  http12:
     ip: 0
     fw: 0
     service: http
-  http13: 
+  http13:
     ip: 0
     fw: 0
     service: http
-  http14: 
+  http14:
     ip: 0
     fw: 0
     service: http
-  http15: 
+  http15:
     ip: 0
     fw: 0
     service: http
-  http16: 
+  http16:
     ip: 0
     fw: 0
     service: http
-  http17: 
+  http17:
     ip: 0
     fw: 0
     service: http
-  http18: 
+  http18:
     ip: 0
     fw: 0
     service: http
-  http19: 
+  http19:
     ip: 0
     fw: 0
     service: http
-  http20: 
+  http20:
     ip: 0
     fw: 0
     service: http
-  http21: 
+  http21:
     ip: 0
     fw: 0
     service: http
-  http22: 
+  http22:
     ip: 0
     fw: 0
     service: http
-  http23: 
+  http23:
     ip: 0
     fw: 0
     service: http
-  http24: 
+  http24:
     ip: 0
     fw: 0
     service: http
-  http25: 
+  http25:
     ip: 0
     fw: 0
     service: http
-  http26: 
+  http26:
     ip: 0
     fw: 0
     service: http
-  http27: 
+  http27:
     ip: 0
     fw: 0
     service: http
-  http28: 
+  http28:
     ip: 0
     fw: 0
     service: http
-  http29: 
+  http29:
     ip: 0
     fw: 0
     service: http
-  http30: 
+  http30:
     ip: 0
     fw: 0
     service: http
-  http31: 
+  http31:
     ip: 0
     fw: 0
     service: http
-  http32: 
+  http32:
     ip: 0
     fw: 0
     service: http
-  http33: 
+  http33:
     ip: 0
     fw: 0
     service: http
-  http34: 
+  http34:
     ip: 0
     fw: 0
     service: http
-  http35: 
+  http35:
     ip: 0
     fw: 0
     service: http
-  http36: 
+  http36:
     ip: 0
     fw: 0
     service: http
-  http37: 
+  http37:
     ip: 0
     fw: 0
     service: http
-  http38: 
+  http38:
     ip: 0
     fw: 0
     service: http
-  http39: 
+  http39:
     ip: 0
     fw: 0
     service: http
-  http40: 
+  http40:
     ip: 0
     fw: 0
     service: http

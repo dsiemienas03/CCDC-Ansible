@@ -7,7 +7,8 @@
     provider:
       ip_address: "{{ ip_address }}"
       api_key: "{{ api_key }}"
-  collections: paloaltonetworks.panos
+  collections:
+    - paloaltonetworks.panos
 
   tasks:
     - name: Include User Variables
@@ -40,11 +41,9 @@
     - name: Update PAN-OS
       ansible.builtin.import_tasks: palo/tasks/updates/os_update.yml
       when: update_os == "y"
-
     - name: Update all other software to latest version
       ansible.builtin.import_tasks: palo/tasks/updates/all_updates.yml
       when: update_other == "y"
-
     - name: Pause for update verification
       ansible.builtin.pause:
       when: update_os == "y" or update_other == "y"

@@ -1,9 +1,9 @@
 ---
-- name: PAN-OS update
+- name: os_update | PAN-OS update
   ansible.builtin.debug:
     msg: "{{ panos_version }}"
 
-- name: Download PAN-OS update
+- name: os_update | Download PAN-OS update
   paloaltonetworks.panos.panos_software:
     provider: "{{ provider }}"
     version: "{{ panos_version }}"
@@ -11,13 +11,13 @@
     restart: true
   register: install_result
 
-- name: Notify Reboot Handler
+- name: os_update | Notify Reboot Handler
   command: echo "Wait for Device Reboot"
   notify: reboot
 
-- name: Pause for Restart Checks
+- name: os_update | Pause for Restart Checks
   pause:
     seconds: 10
 
-- name: Wait for Online Handler
+- name: os_update | Wait for Online Handler
   meta: flush_handlers
