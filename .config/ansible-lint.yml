@@ -1,7 +1,7 @@
 ---
 # .ansible-lint
 
-profile: basic # min, basic, moderate,safety, shared, production
+profile: moderate # min, basic, moderate,safety, shared, production
 
 # Allows dumping of results in SARIF format
 # sarif_file: result.sarif
@@ -26,23 +26,21 @@ exclude_paths:
 # verbosity: 1
 
 # Mock modules or roles in order to pass ansible-playbook --syntax-check
-# mock_modules:
-#   - zuul_return
-#   # note the foo.bar is invalid as being neither a module or a collection
-#   - fake_namespace.fake_collection.fake_module
-#   - fake_namespace.fake_collection.fake_module.fake_submodule
-# mock_roles:
-#   - mocked_role
-#   - author.role_name # old standalone galaxy role
-#   - fake_namespace.fake_collection.fake_role # role within a collection
+mock_modules:
+  - zuul_return
+  # note the foo.bar is invalid as being neither a module or a collection
+  - fake_namespace.fake_collection.fake_module
+  - fake_namespace.fake_collection.fake_module.fake_submodule
+mock_roles:
+  - mocked_role
 
 # Enable checking of loop variable prefixes in roles
-loop_var_prefix: "^(__|{role}_)"
+loop_var_prefix: ^(__|{role}_)
 
 # Enforce variable names to follow pattern below, in addition to Ansible own
 # requirements, like avoiding python identifiers. To disable add `var-naming`
 # to skip_list.
-var_naming_pattern: "^[a-z_][a-z0-9_]*$"
+var_naming_pattern: ^[a-z_][a-z0-9_]*$
 
 use_default_rules: true
 # Load custom rules from this specific folder
@@ -58,7 +56,7 @@ use_default_rules: true
 # When putting ignores inside the ignore file, they are marked as ignored, but
 # still visible, making it easier to address later.
 # skip_list:
-  # -
+# -
 
 # Ansible-lint does not automatically load rules that have the 'opt-in' tag.
 # You must enable opt-in rules by listing each rule 'id' below.
@@ -91,7 +89,7 @@ warn_list:
 #   - all
 
 # Offline mode disables installation of requirements.yml and schema refreshing
-offline: false
+offline: true
 
 # Define required Ansible's variables to satisfy syntax check
 extra_vars:

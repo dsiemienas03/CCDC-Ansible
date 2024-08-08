@@ -5,12 +5,12 @@
     - item.value.fw == 0
     - item.value.service == 'esx'
   paloaltonetworks.panos.panos_security_rule:
-    provider: '{{ provider }}'
+    provider: "{{ provider }}"
     rule_name: inbound-{{ item.key }}
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [lan]
-    destination_ip: ['{{ local_ip }}{{ item.value.ip }}']
+    destination_ip: ["{{ local_ip }}{{ item.value.ip }}"]
     application: [any]
     action: deny
     location: before
@@ -19,7 +19,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
-  loop: '{{ services | dict2items }}'
+  loop: "{{ services | dict2items }}"
 
 - name: palo-service | Add SSH rules
   when:
@@ -27,12 +27,12 @@
     - item.value.fw == 0
     - item.value.service == 'ssh'
   paloaltonetworks.panos.panos_security_rule:
-    provider: '{{ provider }}'
+    provider: "{{ provider }}"
     rule_name: inbound-{{ item.key }}
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [lan]
-    destination_ip: ['{{ local_ip }}{{ item.value.ip }}']
+    destination_ip: ["{{ local_ip }}{{ item.value.ip }}"]
     application: [ssh]
     action: allow
     location: before
@@ -41,7 +41,7 @@
     log_start: true
     log_end: true
     tag_name: [Service]
-  loop: '{{ services | dict2items }}'
+  loop: "{{ services | dict2items }}"
 
 - name: palo-service | Add SMTP rules
   when:
@@ -49,12 +49,12 @@
     - item.value.fw == 0
     - item.value.service == 'smtp'
   paloaltonetworks.panos.panos_security_rule:
-    provider: '{{ provider }}'
+    provider: "{{ provider }}"
     rule_name: inbound-{{  item.key }}
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [lan]
-    destination_ip: ['{{ local_ip }}{{  item.value.ip }}']
+    destination_ip: ["{{ local_ip }}{{  item.value.ip }}"]
     application: [smtp]
     action: allow
     location: before
@@ -63,7 +63,7 @@
     log_start: true
     log_end: true
     tag_name: [Service]
-  loop: '{{ services | dict2items }}'
+  loop: "{{ services | dict2items }}"
 
 - name: palo-service | Add POP3 rules
   when:
@@ -71,12 +71,12 @@
     - item.value.fw == 0
     - item.value.service == 'pop3'
   paloaltonetworks.panos.panos_security_rule:
-    provider: '{{ provider }}'
+    provider: "{{ provider }}"
     rule_name: inbound-{{ item.key }}
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [lan]
-    destination_ip: ['{{ local_ip }}{{ item.value.ip }}']
+    destination_ip: ["{{ local_ip }}{{ item.value.ip }}"]
     application: [pop3]
     action: allow
     location: before
@@ -85,7 +85,7 @@
     log_start: true
     log_end: true
     tag_name: [Service]
-  loop: '{{ services | dict2items }}'
+  loop: "{{ services | dict2items }}"
 
 - name: palo-service | Add HTTP rules
   when:
@@ -93,12 +93,12 @@
     - item.value.fw == 0
     - item.value.service == 'http'
   paloaltonetworks.panos.panos_security_rule:
-    provider: '{{ provider }}'
+    provider: "{{ provider }}"
     rule_name: inbound-{{ item.key }}
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [lan]
-    destination_ip: ['{{ local_ip }}{{ item.value.ip }}']
+    destination_ip: ["{{ local_ip }}{{ item.value.ip }}"]
     application: [web-browsing]
     action: allow
     location: before
@@ -107,4 +107,4 @@
     log_start: true
     log_end: true
     tag_name: [Service]
-  loop: '{{ services | dict2items }}'
+  loop: "{{ services | dict2items }}"

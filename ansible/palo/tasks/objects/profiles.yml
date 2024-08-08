@@ -2,7 +2,7 @@
 # Security profile
 - name: profiles | Setup security profile group
   paloaltonetworks.panos.panos_pg:
-    provider: '{{ provider }}'
+    provider: "{{ provider }}"
     pg_name: security
     virus: default
     file_blocking: strict file blocking
