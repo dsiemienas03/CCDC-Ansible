@@ -16,7 +16,7 @@ updates:
       interval: "daily"
 
   - package-ecosystem: "gitsubmodule"
-    directory: "/*" # Location of package manifests
+    directory: "/submodules/*" # Location of package manifests
     schedule:
       interval: "daily"
 
