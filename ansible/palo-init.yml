@@ -3,7 +3,8 @@
   hosts: palo
   connection: local
   ignore_errors: true
-  collections: paloaltonetworks.panos
+  collections:
+    - paloaltonetworks.panos
 
   tasks:
     - name: Include User Variables
@@ -18,7 +19,7 @@
     # - name: Pause until for commit verification
     #   ansible.builtin.pause:
     - name: Print configs
-      debug:
+      ansible.builtin.debug:
         msg:
           Update OS: "{{ update_os }}"
           Update Other: "{{ update_other }}"

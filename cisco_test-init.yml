@@ -1,0 +1,67 @@
+---
+- name: Cisco configuration
+  hosts: all
+  connection: httpapi
+  ignore_errors: true
+  tasks:
+    # - name: Find an intrustion policy
+    #   community.network.ftd_configuration:
+    #     operation: getIntrusionPolicyList
+    #     register_as: policies
+
+    - name: Find a security policy
+      community.network.ftd_configuration:
+        operation: getAccessPolicyList
+        register_as: policies
+
+    - name: Show policies
+      ansible.builtin.debug:
+        msg: "{{ policies }}"
+
+    - name: Show certian policy params
+      ansible.builtin.debug:
+        msg: |
+          "{{ policies[0].name }}"
+          "{{ policies[0].id }}"
+          "{{ policies[0].type }}"
+
+
+    - name: Find Access rules
+      cisco.fmcansible.fmc_configuration:
+        operation: getAccessRuleList
+        register_as: accessrules
+
+    # - name: Show rules
+    #   ansible.builtin.debug:
+    #     msg: "{{ accessrules }}"
+
+    - name: Get Domain UUID
+      cisco.fmcansible.fmc_configuration:
+        operation: getAllDomain
+        register_as: domain
+
+    - name: Show domain
+      ansible.builtin.debug:
+        msg: "{{ domain }}"
+
+    - name: Find a file policy
+      cisco.fmcansible.fmc_configuration:
+        operation: getAllFilePolicy
+        register_as: file_policies
+        path_params:
+          domainUUID: '{{ domain[0].uuid }}'
+
+    - name: Create an access rule logging malware files
+      cisco.fmcansible.fmc_configuration:
+        operation: upsertAccessRule
+        data:
+          name: "{{ accessrule_name | default('Log traffic with malware files 2') }}"
+          action: ALLOW
+          logEnd: True
+          logBegin: False
+          sendEventsToFMC: True
+          filePolicy: "{{ file_policies[0] }}"
+          type: AccessRule
+        path_params:
+          containerUUID: '{{ accesspolicy[0].id }}'
+          domainUUID: '{{ domain[0].uuid }}'

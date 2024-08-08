@@ -1,3 +1,12 @@
 {
-    "ansible.python.interpreterPath": "/bin/python3.12"
+    "ansible.python.interpreterPath": "/bin/python3.12",
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/hadolint/hadolint/master/contrib/hadolint.json": "file:///home/dsiemienas/github/ansible-firewall/.github/workflows/hadolint.yml",
+        "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/playbook": [
+            "file:///home/dsiemienas/github/ansible-firewall/ansible/palo-get-security-rules.yml",
+            "file:///home/dsiemienas/github/ansible-firewall/ansible/palo-init.yml",
+            "file:///home/dsiemienas/github/ansible-firewall/ansible/palo-beta.yml",
+            "file:///home/dsiemienas/github/ansible-firewall/palo_beta-rules.yml"
+        ]
+    }
 }

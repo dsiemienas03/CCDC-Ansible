@@ -7,7 +7,8 @@
     provider:
       ip_address: "{{ ip_address }}"
       api_key: "{{ api_key }}"
-  collections: paloaltonetworks.panos
+  collections: 
+    - paloaltonetworks.panos
 
   tasks:
     - name: Include User Variables
