@@ -112,6 +112,6 @@
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
 - name: logging | Set initial logging as done
-  set_fact:
+  ansible.builtin.set_fact:
     config_logging: "n"
     cacheable: true

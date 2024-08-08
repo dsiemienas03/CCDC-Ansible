@@ -1,6 +1,6 @@
 ---
 - name: ftd-rules | Accessrule
-  ftd_configuration:
+  community.network.ftd_configuration:
     operation: upsertAccessRule
     data:
       name: AllowCiscoTraffic

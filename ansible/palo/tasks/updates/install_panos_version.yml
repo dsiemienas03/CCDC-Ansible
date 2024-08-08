@@ -16,12 +16,13 @@
   register: install_result
 
 - name: install_panos_version | Notify Reboot Handler
-  command: echo "Wait for Device Reboot"
+  ansible.builtin.command: echo "Wait for Device Reboot"
   notify: reboot
+  changed_when: false
 
 - name: install_panos_version | Pause for Restart Checks
-  pause:
+  ansible.builtin.pause:
     seconds: 10
 
 - name: install_panos_version | Wait for Online Handler
-  meta: flush_handlers
+  ansible.builtin.meta: flush_handlers

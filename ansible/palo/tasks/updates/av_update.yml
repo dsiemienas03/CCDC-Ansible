@@ -18,7 +18,7 @@
   register: download
 
 - name: av_update | Content update result
-  debug:
+  ansible.builtin.debug:
     msg: "{{ download.stdout }}"
 
 - name: av_update | Check anti-virus download result
@@ -43,7 +43,7 @@
   register: av_install
 
 - name: av_update | AV update result
-  debug:
+  ansible.builtin.debug:
     msg: "{{ av_install.stdout }}"
 
 - name: av_update | Check anti-virus install result
@@ -57,5 +57,5 @@
   delay: 5
 
 - name: av_update | AV update result
-  debug:
+  ansible.builtin.debug:
     msg: "{{ av_install_job.stdout }}"

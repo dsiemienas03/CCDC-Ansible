@@ -18,7 +18,7 @@
   register: download
 
 - name: content_update | Content update result
-  debug:
+  ansible.builtin.debug:
     msg: "{{ download.stdout }}"
 
 - name: content_update | Check content download result
@@ -43,7 +43,7 @@
   register: install
 
 - name: content_update | Content update result
-  debug:
+  ansible.builtin.debug:
     msg: "{{ install.stdout }}"
 
 - name: content_update | Check content install result
@@ -57,5 +57,5 @@
   delay: 5
 
 - name: content_update | Content update result
-  debug:
+  ansible.builtin.debug:
     msg: "{{ install_job.stdout }}"
