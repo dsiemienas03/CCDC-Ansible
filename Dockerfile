@@ -37,4 +37,5 @@ RUN set -ex ;\
         -r ansible/config/requirements.yml
 
 
-ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT [ "top", "-c" ]
+# CMD "top -c"
