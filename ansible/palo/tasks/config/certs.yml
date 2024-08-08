@@ -1,5 +1,5 @@
 ---
-- name: Configure Palo Certs
+- name: certs | Configure Palo Certs
   paloaltonetworks.panos.panos_cert_gen_ssh:
     ip_address: "{{ palo_ip }}"
     username: admin
