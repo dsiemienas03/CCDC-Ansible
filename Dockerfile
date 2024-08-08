@@ -1,4 +1,4 @@
-FROM ubuntu:oracular-20240617
+FROM ubuntu:noble-20240605
 
 # Add user
 RUN set -ex ;\
@@ -15,7 +15,7 @@ RUN set -ex ;\
     python3-pip ;\
     apt-get purge -y --auto-remove ;\
     rm -rf /var/lib/apt/lists/*
-
+    
 RUN set -ex ;\
     mkdir ansible ;\
     mkdir ansible/palo ;\
