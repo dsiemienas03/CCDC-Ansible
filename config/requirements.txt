@@ -1,8 +1,8 @@
 cffi==1.16.0
 cryptography==41.0.7
 packaging==24.1
-pan-os-python==1.12.1
-pan-python>=0.17.0
+pan-os-python==1.11.0
+pan-python==0.17.0
 panos-upgrade-assurance==0.3.6
 pathlib==1.0.1
 pycparser==2.22
