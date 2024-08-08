@@ -24,4 +24,3 @@ updates:
     directory: "/.github/" # Location of package manifests
     schedule:
       interval: "daily"
-
