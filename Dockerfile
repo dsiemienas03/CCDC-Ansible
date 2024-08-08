@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM ubuntu:oracular-20240617
 
 # Add user
 RUN set -ex ;\
