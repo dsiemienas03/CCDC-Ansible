@@ -1,0 +1,36 @@
+---
+- name: address | Add LAN Address
+  paloaltonetworks.panos.panos_address_object:
+    provider: "{{ provider }}"
+    name: lan
+    value: "{{  local_mask }}"
+
+- name: address | Add address objects
+  when:
+    - item.value.ip != 0
+    - item.value.fw == 0
+    - item.value.service == 'dns' or
+    - item.value.service == 'esx' or
+    - item.value.service == 'ssh' or
+    - item.value.service == 'dc'
+  paloaltonetworks.panos.panos_address_object:
+    provider: "{{ provider }}"
+    name: "{{ item.key }}"
+    value: "{{ local_ip }}{{ item.value.ip }}"
+  loop: "{{ services | dict2items }}"
+
+- name: address | Add windows server address group
+  paloaltonetworks.panos.panos_address_group:
+    provider: "{{ provider }}"
+    name: windc
+    static_value: [dc1, dc2, dc3, dc4]
+- name: address | Add esx address group
+  paloaltonetworks.panos.panos_address_group:
+    provider: "{{ provider }}"
+    name: esx
+    static_value: [esx1, esx2, esx3, esx4]
+- name: address | Add windows address group
+  paloaltonetworks.panos.panos_address_group:
+    provider: "{{ provider }}"
+    name: windows
+    static_value: win1
