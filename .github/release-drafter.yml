@@ -13,13 +13,13 @@ categories:
   - title: '🔒 Security'
     labels:
       - 'security'
+      - 'dependabot'
   - title: 'Submodule Updates'
     labels:
       - 'gitsubmodule'
   - title: '🧰 Maintenance'
     labels: 
       - 'chore'
-      - 'dependabot'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
 prerelease-identifier: 'alpha' # will create a prerelease with version number x.x.x-alpha.x
