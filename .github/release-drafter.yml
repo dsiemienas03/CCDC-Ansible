@@ -10,10 +10,17 @@ categories:
       - 'fix'
       - 'bugfix'
       - 'bug'
+  - title: '🔒 Security'
+    labels:
+      - 'security'
   - title: '🧰 Maintenance'
     labels: 
       - 'chore'
       - 'dependabot'
+  - title: 'Submodule Updates'
+    labels:
+      - 'gitsubmodule'
+  
 
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
 change-title-escapes: '\<*_&' # You can add # and @ to disable mentions, and add ` to disable code blocks.
