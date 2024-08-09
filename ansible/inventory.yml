@@ -6,28 +6,28 @@ palo1:
     ip_address: 192.168.0.60
     api_key: ""
 palo2:
-  hosts: 
+  hosts:
     192.168.0.61:
   vars:
     ip_address: 192.168.0.60
     api_key: ""
 
 cisco1:
-  hosts: 
+  hosts:
     192.168.0.61:
   vars:
     ip_address: 192.168.0.61
     ansible_user: admin
     ansible_password: ""
-    ansible_httpapi_validate_certs: False
+    ansible_httpapi_validate_certs: false
     ansible_network_os: cisco.fmcansible.fmc
 
 cisco2:
-  hosts: 
+  hosts:
     192.168.0.61:
   vars:
     ip_address: 192.168.0.61
     ansible_user: admin
     ansible_password: ""
-    ansible_httpapi_validate_certs: False
+    ansible_httpapi_validate_certs: false
     ansible_network_os: cisco.fmcansible.fmc
