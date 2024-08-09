@@ -16,6 +16,7 @@ categories:
   - title: 'Submodule Updates'
     labels:
       - 'submodules'
+      - 'gitsubmodule'
   - title: '🧰 Maintenance'
     labels: 
       - 'chore'
