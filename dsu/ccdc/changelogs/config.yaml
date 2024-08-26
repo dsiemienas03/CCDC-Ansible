@@ -6,7 +6,7 @@ changelog_sort: alphanumerical
 changes_file: changelog.yaml
 changes_format: combined
 ignore_other_fragment_extensions: true
-keep_fragments: false
+keep_fragments: true
 mention_ancestor: true
 new_plugins_after_name: removed_features
 notesdir: fragments
@@ -32,6 +32,6 @@ sections:
     - Bugfixes
   - - known_issues
     - Known Issues
-title: Dsu.Ccdc
+title: DSU CCDC Ansible
 trivial_section_name: trivial
 use_fqcn: true
