@@ -123,9 +123,10 @@ jobs:
           push-branch: "main"
           commit-message: "update due to new release"
           force-add: "true"
-          files: CHANGELOG.rst changelogs/
+          files: ./dsu/ccdcCHANGELOG.rst ./dsu/ccdc/changelogs/
           name: N/A
           email: N/A
+
 
       # do a second checkout to prevent race situation
       # changelog gets updated but action works on old commit id
