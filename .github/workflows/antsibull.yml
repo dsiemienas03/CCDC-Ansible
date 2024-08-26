@@ -13,29 +13,29 @@ on:
 env:
   NAMESPACE: dsu
   COLLECTION_NAME: ccdc
-  ANSIBLE_COLLECTIONS_PATHS: /dsu/ccdc
+  ANSIBLE_COLLECTIONS_PATHS: /dsu/ccdc/
 jobs:
-  update_docs:
-    runs-on: ubuntu-latest
-    name: create documentation inside docs-folder
-    steps:
-      - uses: actions/checkout@v4.1.1
-        with:
-          fetch-depth: 0
+  # update_docs:
+  #   runs-on: ubuntu-latest
+  #   name: create documentation inside docs-folder
+  #   steps:
+  #     - uses: actions/checkout@v4.1.1
+  #       with:
+  #         fetch-depth: 0
 
-      # ansible-doc-extractor requires the collection to be in a directory in
-      # the form ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/
+  #     # ansible-doc-extractor requires the collection to be in a directory in
+  #     # the form ./ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}/
 
-      - name: Check out code to ansible collection location
-        uses: actions/checkout@v4.1.1
-        with:
-          path: ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
-          fetch-depth: 0
+  #     - name: Check out code to ansible collection location
+  #       uses: actions/checkout@v4.1.1
+  #       with:
+  #         path: ansible_collections/${{env.NAMESPACE}}/${{env.COLLECTION_NAME}}
+  #         fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5 # v5
-        with:
-          python-version: 3.12
+  #     - name: Set up Python
+  #       uses: actions/setup-python@v5 # v5
+  #       with:
+  #         python-version: 3.12
 
       # - name: Install ansible-doc-extractor
       #   run: python -m pip install ansible-doc-extractor[ansible]
@@ -57,7 +57,7 @@ jobs:
   generate_changelog:
     runs-on: ubuntu-latest
     name: create release draft
-    needs: update_docs # the documentation should be updated before creating a new release
+    # needs: update_docs # the documentation should be updated before creating a new release
     steps:
       - uses: "actions/checkout@v4.1.1" # v4.1.1
         with:
@@ -84,7 +84,6 @@ jobs:
         run: |
           VER=$(cat VERSION)
           echo "VERSION=$VER" >> $GITHUB_ENV
-
 
       - name: Generate new version in changelog.yaml
         run: antsibull-changelog release -v --version "${{ env.VERSION }}"
