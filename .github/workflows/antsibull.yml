@@ -7,7 +7,7 @@ name: Antsibull
 # documentation.
 
 on:
-  push:
+  pull_request:
     branches: ["main"]
 
 env:
@@ -126,6 +126,8 @@ jobs:
           files: .
           name: N/A
           email: N/A
+
+
 
 
       # do a second checkout to prevent race situation
