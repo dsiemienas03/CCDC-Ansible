@@ -1,5 +1,5 @@
 ---
-- name: os_update | PAN-OS update
+- name: os_update | PAN-OS_update
   ansible.builtin.debug:
     msg: "{{ panos_version }}"
 

@@ -1,0 +1,160 @@
+- name: Palo
+  hosts: palo
+  connection: local
+  ignore_errors: true
+  vars:
+    provider:
+      ip_address: "{{ palo_ip }}"
+      api_key: "{{ api_key }}"
+  # collections:
+
+  tasks:
+    - name: Include User Variables
+      ansible.builtin.include_vars: config.yml
+    - name: Include IP vars
+      ansible.builtin.include_vars: ips.yml
+    # - name: Show Facts
+    #   ansible.builtin.debug:
+    #     var: "{{update_os}}, {{logging}}"
+
+    # - name: Pause until for commit verification
+    #   ansible.builtin.pause:
+    - name: Print configs
+      ansible.builtin.debug:
+        msg:
+          Update OS: "{{ update_os }}"
+          Update Other: "{{ update_other }}"
+          Initial Interface: "{{ config_initial_interface }}"
+          Initial Groups: "{{ config_initial_groups }}"
+          Logging: "{{ config_logging }}"
+          Initial Rules: "{{ config_initial_rules }}"
+          PANOS Version: "{{ panos_version }}"
+          # IP Range: "{{ ip_range }}"
+          # Network: "{{ ip_range_mask }}"
+          Wazuh: "{{ wazuh }}"
+          Wazuh Port: "{{ wazuh_port }}"
+    - name: Confirm config
+      ansible.builtin.pause:
+    - name: Palo OS Update
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: os_update
+      when: update_os
+
+    - name: Update all other software to latest version
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: all_updates
+      when: update_other == "y"
+    - name: Pause for update verification
+      ansible.builtin.pause:
+      when: update_os or update_other
+
+    - name: Set os_update as done
+      ansible.builtin.set_fact:
+        update_os: "n"
+        cacheable: true
+      when: update_os == "y"
+    - name: Set os_update as done
+      ansible.builtin.set_fact:
+        update_other: "n"
+        cacheable: true
+      when: update_other == "y"
+
+    # Zones
+    - name: Add Zones
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: zones
+      when: config_zones == "y"
+
+    # Interfaces
+    - name: Add interfaces
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: interfaces
+      when: config_initial_interface == "y"
+
+    # Commit changes
+    - name: Commit interface changes
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: commit
+      when: config_initial_interface == "y"
+
+    # Objects
+    - name: Add addresses
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: address
+      when: config_initial_groups == "y"
+
+    - name: Add profiles
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: profiles
+      when: config_initial_groups
+
+    - name: Add services
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: services
+      when: config_initial_groups
+
+    - name: Commit object changes
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: commit
+      when: config_initial_groups
+
+    # Logging
+    - name: Add logging
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: logging
+      when: config_logging == "y"
+
+    - name: Commit logging changes
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: commit
+      when: config_logging == "y"
+
+    # Firewall rules
+    - name: Add CCDC firewall Rules
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: palo-rules
+      when: config_initial_rules == "y"
+
+    - name: Commit rule changes
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: commit
+      when: config_initial_rules == "y"
+
+  handlers:
+    - name: Wait for System Information
+      paloaltonetworks.panos.panos_op:
+        provider: "{{ provider }}"
+        cmd: show system info
+      register: system_info
+      until: system_info is not failed
+      retries: 100
+      delay: 10
+      listen: reboot
+
+    - name: Update System Info
+      ansible.builtin.set_fact:
+        system_info_json: "{{ system_info.stdout | from_json }}"
+      listen: reboot
+
+    - name: Update Software Version
+      ansible.builtin.set_fact:
+        sw_version: "{{ system_info_json.response.result.system['sw-version'] }}"
+      listen: reboot
+
+    - name: Display Current Software version
+      ansible.builtin.debug:
+        msg: "Current software version is: {{ sw_version }}"
+      listen: reboot
