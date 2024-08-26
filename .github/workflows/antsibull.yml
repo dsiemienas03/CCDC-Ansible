@@ -64,9 +64,9 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@0a5c61591373683505ea898e09a3ea4f39ef2b9c # v5
+        uses: actions/setup-python@v5 # v5
         with:
-          python-version: 3.8
+          python-version: 3.12
 
       - name: Install antsibull-changelog, antsichaut
         run: python -m pip install antsibull-changelog antsichaut --disable-pip-version-check
@@ -82,7 +82,7 @@ jobs:
 
       - name: calculate next version
         id: version
-        uses: patrickjahns/version-drafter-action@fda4b8e4017bee5dd5794f255a4d484e8e647561 # v1
+        uses: patrickjahns/version-drafter-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
