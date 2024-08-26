@@ -52,6 +52,7 @@ galaxy_info:
     #       Maximum 20 tags per role.
 
 dependencies: []
+  # - dsu.ccdc.palo
   # - paloaltonetworks.panos
   # - pfsensible.core
   # - cisco.fmcansible

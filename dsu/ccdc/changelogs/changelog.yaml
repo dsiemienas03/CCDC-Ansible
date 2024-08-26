@@ -1,5 +1,4 @@
----
-ancestor:
+ancestor: null
 releases:
   1.0.0:
-    release_date: "2024-08-09"
+    release_date: '2024-08-09'
