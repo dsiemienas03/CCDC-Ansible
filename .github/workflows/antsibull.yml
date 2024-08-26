@@ -13,8 +13,7 @@ on:
 env:
   NAMESPACE: dsu
   COLLECTION_NAME: ccdc
-  ANSIBLE_COLLECTIONS_PATHS: ./
-  next-version: ""
+  ANSIBLE_COLLECTIONS_PATHS: dsu/ccdc
 jobs:
   update_docs:
     runs-on: ubuntu-latest
@@ -86,7 +85,7 @@ jobs:
           VER=$(cat VERSION)
           echo "VERSION=$VER" >> $GITHUB_ENV
 
-          
+
       - name: Generate new version in changelog.yaml
         run: antsibull-changelog release -v --version "${{ env.VERSION }}"
 
