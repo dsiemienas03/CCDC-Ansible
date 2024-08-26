@@ -37,22 +37,22 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Install ansible-doc-extractor
-        run: python -m pip install ansible-doc-extractor[ansible]
+      # - name: Install ansible-doc-extractor
+      #   run: python -m pip install ansible-doc-extractor[ansible]
 
-      - name: create documentation
-        run: ansible-doc-extractor docs/  # plugins/inventory/* plugins/modules/*
+      # - name: create documentation
+      #   run: ansible-doc-extractor docs/  # plugins/inventory/* plugins/modules/*
 
-      - name: commit documentation
-        uses: github-actions-x/commit@722d56b8968bf00ced78407bbe2ead81062d8baa # v2.9
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: "main"
-          commit-message: "update documentation"
-          force-add: "true"
-          files: docs/
-          name: Telekom MMS GmbH
-          email: mms@telekom.de
+      # - name: commit documentation
+      #   uses: github-actions-x/commit@722d56b8968bf00ced78407bbe2ead81062d8baa # v2.9
+      #   with:
+      #     github-token: ${{ secrets.GITHUB_TOKEN }}
+      #     push-branch: "main"
+      #     commit-message: "update documentation"
+      #     force-add: "true"
+      #     files: docs/
+      #     name: N/A
+      #     email: N/A
 
   generate_changelog:
     runs-on: ubuntu-latest
@@ -117,8 +117,8 @@ jobs:
           commit-message: "update due to new release"
           force-add: "true"
           files: CHANGELOG.rst changelogs/
-          name: Deutsche Telekom MMS
-          email: mms@telekom.de
+          name: N/A
+          email: N/A
 
       # do a second checkout to prevent race situation
       # changelog gets updated but action works on old commit id
