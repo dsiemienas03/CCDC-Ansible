@@ -120,10 +120,9 @@ jobs:
         with:
           # use the token obtained in the step before
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: "main"
+          push-branch: "build"
           commit-message: "update due to new release"
           force-add: "true"
-          force-push: "true"
           files: .
           name: N/A
           email: N/A
