@@ -7,10 +7,15 @@ name: Antsibull
 # documentation.
 
 on:
-  release:
-    types: [ merge ]
+  workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+
+env:
+  NAMESPACE: dsu
+  COLLECTION_NAME: ccdc
+  ANSIBLE_COLLECTIONS_PATHS: ./
 jobs:
   update_docs:
     runs-on: ubuntu-latest
@@ -44,9 +49,9 @@ jobs:
         uses: github-actions-x/commit@722d56b8968bf00ced78407bbe2ead81062d8baa # v2.9
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          push-branch: 'main'
-          commit-message: 'update documentation'
-          force-add: 'true'
+          push-branch: "main"
+          commit-message: "update documentation"
+          force-add: "true"
           files: docs/
           name: Telekom MMS GmbH
           email: mms@telekom.de
@@ -54,7 +59,7 @@ jobs:
   generate_changelog:
     runs-on: ubuntu-latest
     name: create release draft
-    needs: update_docs  # the documentation should be updated before creating a new release
+    needs: update_docs # the documentation should be updated before creating a new release
     steps:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
         with:
@@ -71,7 +76,7 @@ jobs:
       - name: Install pandoc
         run: sudo apt-get install pandoc
 
-      - name: 'Get Previous tag'
+      - name: "Get Previous tag"
         id: previoustag
         uses: "WyriHaximus/github-action-get-previous-tag@385a2a0b6abf6c2efeb95adfac83d96d6f968e0c" # v1.3.0
         env:
@@ -110,9 +115,9 @@ jobs:
         with:
           # use the token obtained in the step before
           github-token: ${{ steps.githubAppAuth.outputs.token }}
-          push-branch: 'main'
-          commit-message: 'update due to new release'
-          force-add: 'true'
+          push-branch: "main"
+          commit-message: "update due to new release"
+          force-add: "true"
           files: CHANGELOG.rst changelogs/
           name: Deutsche Telekom MMS
           email: mms@telekom.de
