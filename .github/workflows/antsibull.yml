@@ -59,7 +59,7 @@ jobs:
     name: create release draft
     needs: update_docs # the documentation should be updated before creating a new release
     steps:
-      - uses: actions/checkout@4.1.1 # v4.1.1
+      - uses: "actions/checkout@v4.1.1" # v4.1.1
         with:
           fetch-depth: 0
 
