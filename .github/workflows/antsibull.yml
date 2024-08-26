@@ -58,6 +58,12 @@ jobs:
     runs-on: ubuntu-latest
     name: create release draft
     # needs: update_docs # the documentation should be updated before creating a new release
+    permissions:
+      contents: read
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
     steps:
       - uses: "actions/checkout@v4.1.1" # v4.1.1
         with:
@@ -102,18 +108,18 @@ jobs:
       # the token is needed so the github app can push to the repository
       # the github app can bypass the branch protection rule (need a PR to merge)
       # this way it can directly commit to main
-      - name: Obtain a GitHub App Installation Access Token
-        id: githubAppAuth
-        run: |
-          TOKEN="$(npx obtain-github-app-installation-access-token ci ${{ secrets.GH_BRANCH_PROTECTION_APP_TOKEN }})"
-          echo "::add-mask::$TOKEN"
-          echo token=${TOKEN} >> $GITHUB_OUTPUT
+      # - name: Obtain a GitHub App Installation Access Token
+      #   id: githubAppAuth
+      #   run: |
+      #     TOKEN="$(npx obtain-github-app-installation-access-token ci ${{ secrets.GH_BRANCH_PROTECTION_APP_TOKEN }})"
+      #     echo "::add-mask::$TOKEN"
+      #     echo token=${TOKEN} >> $GITHUB_OUTPUT
 
       - name: update and push due to new release
         uses: github-actions-x/commit@v2.9 # v2.9
         with:
           # use the token obtained in the step before
-          github-token: ${{ steps.githubAppAuth.outputs.token }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           push-branch: "main"
           commit-message: "update due to new release"
           force-add: "true"
