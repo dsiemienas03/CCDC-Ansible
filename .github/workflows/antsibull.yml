@@ -1,0 +1,35 @@
+---
+name: Docker Release
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  release:
+    types: [ published, prereleased, released ]
+env:
+  # Use docker.io for Docker Hub if empty
+  REGISTRY: ghcr.io
+  # REGISTRY2: docker.com
+  # github.repository as <account>/<repo>
+  IMAGE_NAME: ${{ github.repository }}
+  COMPARE_TAG: latest
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Get Previous tag"
+        id: previoustag
+        uses: "WyriHaximus/github-action-get-previous-tag@master"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+      
+      - name: "Run antsichaut"
+        uses: ansible-community/antsichaut@main
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          since_version: "${{ steps.previoustag.outputs.tag }}"
