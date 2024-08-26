@@ -6,8 +6,8 @@
     provider:
       ip_address: "{{ ip_address }}"
       api_key: "{{ api_key }}"
-  collections:
-    - dsu.ccdc
+  # collections:
+  #   - dsu.ccdc
   roles:
     - palo
 
