@@ -1,0 +1,43 @@
+- name: palo
+  hosts: palo
+  connection: local
+  ignore_errors: true
+  vars:
+    provider:
+      ip_address: "{{ palo_ip }}"
+      api_key: "{{ api_key }}"
+  collections:
+    - ccdc.ansible
+  tasks:
+    - name: Include User Variables
+      ansible.builtin.include_vars: config.yml
+    - name: Include IP vars
+      ansible.builtin.include_vars: ips.yml
+    - name: Import a role
+      ansible.builtin.import_role:
+        name: palo
+    # - name: Show Facts
+    #   ansible.builtin.debug:
+    #     var: "{{update_os}}, {{logging}}"
+
+    # - name: Pause until for commit verification
+    #   ansible.builtin.pause:
+    - name: Print configs
+      ansible.builtin.debug:
+        msg:
+          Update OS: "{{ update_os }}"
+          Update Other: "{{ update_other }}"
+          Initial Interface: "{{ config_initial_interface }}"
+          Initial Groups: "{{ config_initial_groups }}"
+          Logging: "{{ config_logging }}"
+          Initial Rules: "{{ config_initial_rules }}"
+          PANOS Version: "{{ panos_version }}"
+          # IP Range: "{{ ip_range }}"
+          # Network: "{{ ip_range_mask }}"
+          Wazuh: "{{ wazuh }}"
+          Wazuh Port: "{{ wazuh_port }}"
+    - name: Confirm config
+      ansible.builtin.pause:
+    - name: Update PAN-OS
+      ansible.builtin.import_tasks: palo.PAN-OS_update
+      when: update_os == "y"
