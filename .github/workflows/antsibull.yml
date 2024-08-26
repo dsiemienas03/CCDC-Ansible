@@ -7,7 +7,7 @@ name: Antsibull
 # documentation.
 
 on:
-  pull_request:
+  push:
     branches: ["main"]
 
 env:
@@ -123,6 +123,7 @@ jobs:
           push-branch: "main"
           commit-message: "update due to new release"
           force-add: "true"
+          force-push: "true"
           files: .
           name: N/A
           email: N/A
