@@ -2,5 +2,6 @@
     "yaml.schemas": {
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible-lint-config.json": "file:///home/dsiemienas/github/ansible-firewall/.config/.ansible-lint",
         "https://raw.githubusercontent.com/ansible/ansible-lint/main/src/ansiblelint/schemas/ansible.json#/$defs/tasks": "file:///home/dsiemienas/github/ansible-firewall/cisco/tasks/rules/ftd-rules.yml"
-    }
+    },
+    "ansible.python.interpreterPath": "/home/dsiemienas/github/ansible-firewall/.venv/bin/python"
 }
