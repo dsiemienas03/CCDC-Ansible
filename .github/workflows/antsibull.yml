@@ -87,7 +87,7 @@ jobs:
 
       - name: Generate new version in changelog.yaml
         run: antsibull-changelog release -v --version "${{ env.VERSION }}"
-        working-directory: /dsu/ccdc
+        working-directory: ./dsu/ccdc
 
       - name: Generate changelog.yaml
         run: antsichaut
