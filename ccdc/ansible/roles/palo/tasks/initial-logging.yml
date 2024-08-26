@@ -1,12 +1,12 @@
 ---
 # Logging stuff
 # log server and forwarding profiles
-- name: logging | Create syslog profile
+- name: initial-logging | Create syslog profile
   paloaltonetworks.panos.panos_syslog_profile:
     provider: "{{ provider }}"
     name: wazzuh-profile
 
-- name: logging | Create syslog server
+- name: initial-logging | Create syslog server
   paloaltonetworks.panos.panos_syslog_server:
     provider: "{{ provider }}"
     syslog_profile: wazzuh-profile
@@ -14,14 +14,14 @@
     server: "{{ local_ip }}{{ wazuh }}"
     syslog_port: "{{ wazuh_port }}"
 
-- name: logging | Create log forwarding profile
+- name: initial-logging | Create log forwarding profile
   paloaltonetworks.panos.panos_log_forwarding_profile:
     provider: "{{ provider }}"
     name: Loggie McLog Face
     enhanced_logging: true
 
 # logging profiles
-- name: logging | Create log forwarding profile match list for traffic
+- name: initial-logging | Create log forwarding profile match list for traffic
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -30,7 +30,7 @@
     log_type: traffic
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list threat
+- name: initial-logging | Create log forwarding profile match list threat
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -39,7 +39,7 @@
     log_type: threat
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for wildfire
+- name: initial-logging | Create log forwarding profile match list for wildfire
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -48,7 +48,7 @@
     log_type: wildfire
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for URL
+- name: initial-logging | Create log forwarding profile match list for URL
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -57,7 +57,7 @@
     log_type: url
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for data
+- name: initial-logging | Create log forwarding profile match list for data
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -66,7 +66,7 @@
     log_type: data
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for GTP
+- name: initial-logging | Create log forwarding profile match list for GTP
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -75,7 +75,7 @@
     log_type: gtp
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for tunnel
+- name: initial-logging | Create log forwarding profile match list for tunnel
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -84,7 +84,7 @@
     log_type: tunnel
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for auth
+- name: initial-logging | Create log forwarding profile match list for auth
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -93,7 +93,7 @@
     log_type: auth
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for SCTP
+- name: initial-logging | Create log forwarding profile match list for SCTP
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -102,7 +102,7 @@
     log_type: sctp
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Create log forwarding profile match list for decryption
+- name: initial-logging | Create log forwarding profile match list for decryption
   paloaltonetworks.panos.panos_log_forwarding_profile_match_list:
     provider: "{{ provider }}"
     log_forwarding_profile: Loggie McLog Face
@@ -111,7 +111,7 @@
     log_type: decryption
     filter: All Logs
     syslog_profiles: [wazzuh-profile]
-- name: logging | Set initial logging as done
+- name: initial-logging | Set initial logging as done
   ansible.builtin.set_fact:
     config_logging: "n"
     cacheable: true
