@@ -123,7 +123,7 @@ jobs:
           push-branch: "main"
           commit-message: "update due to new release"
           force-add: "true"
-          files: ./dsu/ccdcCHANGELOG.rst ./dsu/ccdc/changelogs/
+          files: .
           name: N/A
           email: N/A
 
