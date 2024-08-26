@@ -87,7 +87,6 @@ jobs:
 
       - name: Generate new version in changelog.yaml
         run: antsibull-changelog release -v --version "${{ env.VERSION }}"
-        working-directory: ./dsu/ccdc
 
       - name: Generate changelog.yaml
         run: antsichaut
@@ -97,6 +96,7 @@ jobs:
 
       - name: Update Changelog.rst
         run: antsibull-changelog generate -v
+        working-directory: ./dsu/ccdc
 
       # the token is needed so the github app can push to the repository
       # the github app can bypass the branch protection rule (need a PR to merge)
