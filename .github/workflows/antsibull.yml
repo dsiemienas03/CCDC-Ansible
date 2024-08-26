@@ -8,16 +8,7 @@ name: Docker Release
 
 on:
   release:
-    types: [ published, prereleased, released ]
-env:
-  # Use docker.io for Docker Hub if empty
-  REGISTRY: ghcr.io
-  # REGISTRY2: docker.com
-  # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
-  COMPARE_TAG: latest
-
-
+    types: [ merge ]
 jobs:
   build:
     runs-on: ubuntu-latest
