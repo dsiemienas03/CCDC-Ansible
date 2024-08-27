@@ -16,8 +16,9 @@ categories:
   - title: 'Submodule Updates'
     labels:
       - 'submodules'
+      - 'gitsubmodule'
   - title: '🧰 Maintenance'
-    labels: 
+    labels:
       - 'chore'
       - 'dependabot'
 change-template: '- $TITLE @$AUTHOR (#$NUMBER)'
@@ -49,5 +50,3 @@ template: |
   ## Changes
 
   $CHANGES
-
-

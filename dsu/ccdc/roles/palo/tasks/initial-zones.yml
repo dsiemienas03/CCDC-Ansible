@@ -1,0 +1,50 @@
+---
+# Create zones
+- name: initial-zones | Create WAN zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: wan
+
+- name: initial-zones | Create LAN zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: lan
+
+# Custom zones for certian applications
+- name: initial-zones | Create Windows zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: win-dc
+
+- name: initial-zones | Create Client zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: clients
+
+- name: initial-zones | Create DB zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: dbsrv
+
+- name: initial-zones | Create MGT zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: mgt
+
+- name: initial-zones | Create esx1 zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: esx1
+
+- name: initial-zones | Create esx2 zone
+  paloaltonetworks.panos.panos_zone:
+    provider: "{{ provider }}"
+    mode: layer2
+    zone: esx2
