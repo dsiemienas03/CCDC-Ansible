@@ -1,5 +1,5 @@
 ---
-- name: Palo
+- name: Palo initial config
   hosts: palo
   connection: local
   ignore_errors: true
