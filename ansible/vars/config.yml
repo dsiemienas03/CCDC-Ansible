@@ -1,9 +1,0 @@
----
-update_os: "n"
-update_other: "y"
-config_zones: "n"
-config_initial_interface: "n"
-config_initial_groups: "y"
-config_logging: "n"
-config_initial_rules: "y"
-panos_version: 11.1.1

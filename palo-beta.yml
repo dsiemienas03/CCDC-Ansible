@@ -12,41 +12,43 @@
 
 
   tasks:
-    - name: Include role
-      ansible.builtin.include_role:
-        name: dsu.ccdc.palo
-        vars_from: main.yml
-    - name: Include IP vars
-      ansible.builtin.include_vars:
-        dir: ../vars/
+    # - name: Include User Variables
+    #   ansible.builtin.include_vars:
+    #     file: /vars/main.yaml
     # - name: Show Facts
     #   ansible.builtin.debug:
     #     var: "{{update_os}}, {{logging}}"
-
+    - name: Include role
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        tasks_from: main
+        vars_from: main.yml
+    - name: Include IP vars
+      ansible.builtin.include_vars:
+        dir: vars/
     # - name: Pause until for commit verification
     #   ansible.builtin.pause:
-    - name: Print configs
-      ansible.builtin.debug:
-        msg:
-          Update OS: "{{ palo_update_os }}"
-          Update Other: "{{ palo_update_other }}"
-          Initial Interface: "{{ palo_config_initial_interface }}"
-          Initial Groups: "{{ palo_config_initial_groups }}"
-          Logging: "{{ palo_config_logging }}"
-          Initial Rules: "{{ palo_config_initial_rules }}"
-          PANOS Version: "{{ palo_panos_version }}"
-          # IP Range: "{{ ip_range }}"
-          # Network: "{{ ip_range_mask }}"
-          Wazuh: "{{ wazuh }}"
-          Wazuh Port: "{{ wazuh_port }}"
+    # - name: Print configs
+    #   ansible.builtin.debug:
+    #     msg:
+    #       Update OS: "{{ palo_update_os }}"
+    #       Update Other: "{{ palo_update_other }}"
+    #       Initial Interface: "{{ palo_config_initial_interface }}"
+    #       Initial Groups: "{{ palo_config_initial_groups }}"
+    #       Logging: "{{ palo_config_logging }}"
+    #       Initial Rules: "{{ palo_config_initial_rules }}"
+    #       PANOS Version: "{{ palo_panos_version }}"
+    #       IP Range: "{{ local_ip }}"
+    #       Network: "{{ local_mask }}"
+    #       Wazuh: "{{ wazuh }}"
+    #       Wazuh Port: "{{ wazuh_port }}"
     # - name: Confirm config
     #   ansible.builtin.pause:
-    - name: Palo OS Update
-      ansible.builtin.import_role:
-        name: dsu.ccdc.palo
-        tasks_from: os_update
-        vars_from: main
-
+    # - name: Palo OS Update
+    #   ansible.builtin.include_role:
+    #     name: dsu.ccdc.palo
+    #     tasks_from: os_update
+    #   when: update_os
 
   #   - name: Update all other software to latest version
   #     ansible.builtin.include_role:

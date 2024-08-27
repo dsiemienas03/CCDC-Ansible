@@ -1,10 +1,10 @@
 ---
 # vars file for palo
-palo_update_os: "n"
-palo_update_other: "y"
-palo_config_zones: "n"
-palo_config_initial_interface: "n"
-palo_config_initial_groups: "n"
-palo_config_logging: "n"
-palo_config_initial_rules: "y"
+palo_update_os: true
+palo_update_other: true
+palo_config_zones: false
+palo_config_initial_interface: false
+palo_config_initial_groups: false
+palo_config_logging: false
+palo_config_initial_rules: false
 palo_panos_version: 11.1.2

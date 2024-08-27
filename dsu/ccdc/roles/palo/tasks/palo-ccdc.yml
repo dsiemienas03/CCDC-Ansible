@@ -4,7 +4,7 @@
     provider: "{{ provider }}"
     rule_name: inbound-phone
     source_zone: [wan]
-    source_ip: ["{{  phone_white }}"]
+    source_ip: ["{{ phone_white }}"]
     destination_zone: [lan]
     destination_ip: [any]
     application: [any]
