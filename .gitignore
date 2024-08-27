@@ -1,5 +1,5 @@
 fw*.yml
 .venv/** */
 .venv/*
-**.tgz
+**/*.tgz
 settings.json
