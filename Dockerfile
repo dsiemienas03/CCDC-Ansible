@@ -1,4 +1,4 @@
-FROM ubuntu:rolling
+FROM ubuntu:noble-20240605
 
 # Add user
 RUN set -ex ;\
@@ -16,7 +16,7 @@ RUN set -ex ;\
     git ;\
     apt-get purge -y --auto-remove ;\
     rm -rf /var/lib/apt/lists/*
-
+    
 RUN set -ex ;\
     mkdir ansible ;\
     mkdir ansible/palo ;\
@@ -25,10 +25,10 @@ RUN set -ex ;\
     mkdir ansible/config
 
 COPY config/* ./ansible/config/
-COPY palo/* ./ansible/palo/
-COPY cisco/* ./ansible/cisco/
-COPY pfsense/* ./ansible/pfsense
 COPY ansible/* ./ansible/
+# COPY palo/* ./ansible/palo/
+# COPY cisco/* ./ansible/cisco/
+# COPY pfsense/* ./ansible/pfsense/
 
 RUN set -ex ;\
     pip3 install --break-system-packages --no-cache-dir \
@@ -38,4 +38,5 @@ RUN set -ex ;\
         -r ansible/config/requirements.yml
 
 
-ENTRYPOINT [ "/bin/bash" ]
+ENTRYPOINT [ "top", "-c" ]
+# CMD "top -c"

@@ -3,14 +3,18 @@
   hosts: palo
   connection: local
   ignore_errors: true
-  collections:
-    - paloaltonetworks.panos
+  vars:
+    provider:
+      ip_address: "{{ ip_address }}"
+      api_key: "{{ api_key }}"
+  # collections:
+  #   - name: paloaltonetworks.panos
 
   tasks:
     - name: Include User Variables
-      include_vars: vars/config.yml
+      ansible.builtin.include_vars: vars/config.yml
     - name: Include IP vars
-      include_vars: vars/ips.yml
+      ansible.builtin.include_vars: vars/ips.yml
 
     # - name: Show Facts
     #   ansible.builtin.debug:
@@ -37,22 +41,20 @@
     - name: Update PAN-OS
       ansible.builtin.import_tasks: palo/tasks/updates/os_update.yml
       when: update_os == "y"
-
     - name: Update all other software to latest version
       ansible.builtin.import_tasks: palo/tasks/updates/all_updates.yml
       when: update_other == "y"
-
     - name: Pause for update verification
       ansible.builtin.pause:
       when: update_os == "y" or update_other == "y"
 
     - name: Set os_update as done
-      set_fact:
+      ansible.builtin.set_fact:
         update_os: "n"
         cacheable: true
       when: update_os == "y"
     - name: Set os_update as done
-      set_fact:
+      ansible.builtin.set_fact:
         update_other: "n"
         cacheable: true
       when: update_other == "y"
@@ -119,16 +121,16 @@
       listen: reboot
 
     - name: Update System Info
-      set_fact:
+      ansible.builtin.set_fact:
         system_info_json: "{{ system_info.stdout | from_json }}"
       listen: reboot
 
     - name: Update Software Version
-      set_fact:
+      ansible.builtin.set_fact:
         sw_version: "{{ system_info_json.response.result.system['sw-version'] }}"
       listen: reboot
 
     - name: Display Current Software version
-      debug:
+      ansible.builtin.debug:
         msg: "Current software version is: {{ sw_version }}"
       listen: reboot

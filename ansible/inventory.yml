@@ -1,41 +1,31 @@
 ---
 palo:
   hosts:
-    palo1:
-      ansible_host: 10.20.244.200
-      provider: 
-        ip_address: "{{ ansible_host }}"
-        api_key: ""
-    palo2:
-      ansible_host: 10.70.70.0
-      provider: 
-        ip_address: "{{ ansible_host }}"
-        api_key: ""
+    192.168.0.60:
+  vars:
+    ip_address: 192.168.0.60
+    api_key: ""
+palo2:
+  hosts:
+    192.168.0.61:
   vars:
     ansible_user: admin
 
-cisco:
-  hosts: 
-    cisco1:
-      ansible_host: 10.70.70.201
-    cisco2:
-      ansible_host: 10.70.70.0
+cisco1:
+  hosts:
+    192.168.0.61:
   vars:
     ansible_user: admin
     ansible_password: ""
-    ansible_httpapi_validate_certs: False
+    ansible_httpapi_validate_certs: false
     ansible_network_os: cisco.fmcansible.fmc
 
-
-esxi: 
-  hosts: 
-    esxi1:
-      ansible_host: 10.20.243.20
-      esxi_password: "Password1!"
-    esxi2:
-      ansible_host: 10.60.60.25
-      esxi_password: "Password1!"
+cisco2:
+  hosts:
+    192.168.0.61:
   vars:
-    esxi_username: root 
-    validate_certs: False
-
+    ip_address: 192.168.0.61
+    ansible_user: admin
+    ansible_password: ""
+    ansible_httpapi_validate_certs: false
+    ansible_network_os: cisco.fmcansible.fmc

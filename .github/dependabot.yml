@@ -9,14 +9,46 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    labels:
+      - docker
+      - dependabot
+    reviewers:
+      - "dsiemienas03"
+    assignees:
+      - "dsiemienas03"
 
   - package-ecosystem: "pip" # See documentation for possible values
-    directory: "/config" # Location of package manifests
+    directory: "/config/" # Location of package manifests
     schedule:
       interval: "daily"
+    labels:
+      - pip
+      - dependabot
+    reviewers:
+      - "dsiemienas03"
+    assignees:
+      - "dsiemienas03"
 
   - package-ecosystem: "gitsubmodule"
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+    labels:
+      - gitsubmodule
+      - dependabot
+    reviewers:
+      - "dsiemienas03"
+    assignees:
+      - "dsiemienas03"
 
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily"
+    labels:
+      - github_actions
+      - dependabot
+    reviewers:
+      - "dsiemienas03"
+    assignees:
+      - "dsiemienas03"
