@@ -1,5 +1,5 @@
 ---
-- name: palo-service | Block WAN to esxi
+- name: palo_service | Block WAN to esxi
   when:
     - item.value.ip != 0
     - item.value.fw == 0
@@ -21,7 +21,7 @@
     tag_name: [Critical]
   loop: "{{ services | dict2items }}"
 
-- name: palo-service | Add SSH rules
+- name: palo_service | Add SSH rules
   when:
     - item.value.ip != 0
     - item.value.fw == 0
@@ -43,7 +43,7 @@
     tag_name: [Service]
   loop: "{{ services | dict2items }}"
 
-- name: palo-service | Add SMTP rules
+- name: palo_service | Add SMTP rules
   when:
     - item.value.ip != 0
     - item.value.fw == 0
@@ -65,7 +65,7 @@
     tag_name: [Service]
   loop: "{{ services | dict2items }}"
 
-- name: palo-service | Add POP3 rules
+- name: palo_service | Add POP3 rules
   when:
     - item.value.ip != 0
     - item.value.fw == 0
@@ -87,7 +87,7 @@
     tag_name: [Service]
   loop: "{{ services | dict2items }}"
 
-- name: palo-service | Add HTTP rules
+- name: palo_service | Add HTTP rules
   when:
     - item.value.ip != 0
     - item.value.fw == 0

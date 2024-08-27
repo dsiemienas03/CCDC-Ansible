@@ -1,22 +1,23 @@
-- name: Palo configuration
-  hosts: firewall
+- name: Palo
+  hosts: palo
   connection: local
   ignore_errors: true
+  roles:
+    - dsu.ccdc.palo
   vars:
     provider:
       ip_address: "{{ ip_address }}"
       api_key: "{{ api_key }}"
-  # collections:
-  #   - dsu.ccdc
-  roles:
-    - palo
+
 
   tasks:
-    - name: Include User Variables
-      ansible.builtin.include_vars: vars/config.yml
+    - name: Include role
+      ansible.builtin.include_role:
+        name: dsu.ccdc.palo
+        vars_from: main.yml
     - name: Include IP vars
-      ansible.builtin.include_vars: vars/ips.yml
-
+      ansible.builtin.include_vars:
+        dir: ../vars/
     # - name: Show Facts
     #   ansible.builtin.debug:
     #     var: "{{update_os}}, {{logging}}"
@@ -26,34 +27,37 @@
     - name: Print configs
       ansible.builtin.debug:
         msg:
-          Update OS: "{{ update_os }}"
-          Update Other: "{{ update_other }}"
-          Initial Interface: "{{ config_initial_interface }}"
-          Initial Groups: "{{ config_initial_groups }}"
-          Logging: "{{ config_logging }}"
-          Initial Rules: "{{ config_initial_rules }}"
-          PANOS Version: "{{ panos_version }}"
+          Update OS: "{{ palo_update_os }}"
+          Update Other: "{{ palo_update_other }}"
+          Initial Interface: "{{ palo_config_initial_interface }}"
+          Initial Groups: "{{ palo_config_initial_groups }}"
+          Logging: "{{ palo_config_logging }}"
+          Initial Rules: "{{ palo_config_initial_rules }}"
+          PANOS Version: "{{ palo_panos_version }}"
           # IP Range: "{{ ip_range }}"
           # Network: "{{ ip_range_mask }}"
           Wazuh: "{{ wazuh }}"
           Wazuh Port: "{{ wazuh_port }}"
 
-    # Import beta tasks here
-    - name: Set palo ip_address
-      ansible.builtin.set_fact:
-        palo_ip: "{{ ip_address }}"
+    - name: Tags
+      ansible.builtin.import_role:
+        name: dsu.ccdc.palo
+        tasks_from: tags
 
-    - name: Configure SSH decryption
-      ansible.builtin.include_roles:
-        name: palo
-        tasks_from: ssh-decrypt
-      when: config_initial_groups
+    - name: Show IPs
+      ansible.builtin.debug:
+        msg:
+          Phone White: "{{ phone_white }}"
+          CCS White: "{{ ccs_white }}"
+          Proxy White: "{{ proxy_white }}"
+          Mask White: "{{ mask_white }}"
+    - name: Confirm config
+      ansible.builtin.pause:
 
-    # Commit changes
-    - name: Commit interface changes
-      ansible.builtin.include_tasks:
-        tasks_from: commit.yml
-      when: config_initial_interface == "y"
+    - name: Add CCDC rules
+      ansible.builtin.import_role:
+        name: dsu.ccdc.palo
+        tasks_from: palo_ccdc
 
   handlers:
     - name: Wait for System Information
