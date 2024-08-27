@@ -1,8 +1,6 @@
 # # # .github/workflows/ansible-lint.yml
 name: Ansible Lint
 on:
-  pull_request:
-    branches: ["main"]
   release:
     types: [published, prereleased, released]
 
