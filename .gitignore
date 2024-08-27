@@ -2,3 +2,4 @@ fw*.yml
 .venv/** */
 .venv/*
 **.tgz
+settings.json
