@@ -1,3 +1,4 @@
+---
 - name: Palo
   hosts: palo
   connection: local

@@ -1,6 +1,6 @@
-==========================
-Ccdc.Ansible Release Notes
-==========================
+======================
+Dsu.Ccdc Release Notes
+======================
 
 .. contents:: Topics
 
