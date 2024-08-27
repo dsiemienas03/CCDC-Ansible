@@ -14,6 +14,9 @@
       ansible.builtin.include_vars: config.yml
     - name: Include IP vars
       ansible.builtin.include_vars: ips.yml
+    - name: Import role
+      ansible.builtin.import_role:
+        name: palo
     # - name: Show Facts
     #   ansible.builtin.debug:
     #     var: "{{update_os}}, {{logging}}"
