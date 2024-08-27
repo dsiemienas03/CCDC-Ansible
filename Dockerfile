@@ -54,7 +54,8 @@ COPY --chown=ansible:ansible dsu/** ./dsu/
 
 RUN set -ex ;\
     ansible-galaxy collection build dsu/ ;\
-    ansible-galaxy collection install --offline dsu-ccdc-1.0.0.tar.gz
+    ansible-galaxy collection install --offline dsu-ccdc-1.0.0.tar.gz ;\
+    rm -rf dsu-ccdc-1.0.0.tar.gz
 
 ENTRYPOINT [ "/bin/bash", "-c" ]
 CMD "top"
