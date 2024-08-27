@@ -12,10 +12,10 @@
   tasks:
     - name: Include User Variables
       ansible.builtin.include_vars:
-        name: dsu.ccdc.palo.config
+        name: config
     - name: Include IP vars
       ansible.builtin.include_vars:
-        name: dsu.ccdc.ips
+        name: ips
     - name: Import role
       ansible.builtin.include_vars: palo.main
     # - name: Show Facts
