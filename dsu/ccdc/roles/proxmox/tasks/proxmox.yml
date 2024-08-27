@@ -4,3 +4,9 @@
     api_user: "{{ proxmox_api_user }}"
     api_password: "{{ proxmox_api_password }}"
     api_host: "{{}}"
+
+- name: proxmox | Update NICs
+  community.general.proxmox:
+    api_user: "{{ proxmox_api_user }}"
+    api_password: "{{ proxmox_api_password }}"
+    api_host: "{{}}"
