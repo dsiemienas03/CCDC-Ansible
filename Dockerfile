@@ -39,7 +39,6 @@ RUN set -ex ;\
 
 COPY config/* ./ansible/config/
 COPY --chown=ansible:ansible fw-setup.sh .
-COPY --chown=ansible:ansible fw.yml .
 # COPY palo/* ./ansible/palo/
 # COPY cisco/* ./ansible/cisco/
 # COPY pfsense/* ./ansible/pfsense/
