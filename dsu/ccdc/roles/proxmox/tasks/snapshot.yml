@@ -11,7 +11,7 @@
     api_host: "{{ ip_address }}"
     api_user: "{{ proxmox_user }}"
     api_password: "{{ api_password }}"
-    vmid: 
+    vmid: {{ add vm }}
     state: present
     snapname: pre-updates
 
