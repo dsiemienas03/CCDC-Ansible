@@ -4,7 +4,7 @@
     api_host: "{{ ip_address }}"
     api_user: "{{ proxmox_user }}"
     api_password: "{{ api_password }}"
-    node: node01
+    node: "{{ node }}"
 
 - name: snapshot | Create new container snapshot
   community.general.proxmox_snap:
