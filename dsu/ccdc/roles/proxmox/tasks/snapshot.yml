@@ -13,4 +13,4 @@
     api_password: "{{ api_password }}"
     vmid: "{{ add_vm }}"
     state: present
-    snapname: pre-updates
+    snapname: "{{vm_id}}-{{snap_num}}"
