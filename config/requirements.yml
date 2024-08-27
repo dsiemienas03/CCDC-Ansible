@@ -7,3 +7,5 @@ collections:
   # - name: vbotka.freebsd_pf
   # Cisco
   - name: cisco.fmcansible
+  # Proxmox community.general.proxmox
+  - name: community.general
