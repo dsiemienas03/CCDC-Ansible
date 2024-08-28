@@ -1,6 +1,6 @@
 fw*.yml
-.venv/** */
-.venv/*
+.vscode/
+.venv/
 **/*.tgz
-**/**.tar.gz
+**/*.tar.gz
 settings.json
