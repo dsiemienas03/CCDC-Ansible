@@ -1,1 +1,6 @@
 fw*.yml
+.venv/** */
+.venv/*
+**/*.tgz
+**/**.tar.gz
+settings.json

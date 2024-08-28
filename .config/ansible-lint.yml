@@ -13,11 +13,12 @@ exclude_paths:
   - .github/
   - submodules/
   - test-playbooks/
-  - ansible/cisco
-  - ansible/pfsense
+  - /**/cisco
+  - /**/pfsense
   - /**beta.yml
   - /**/*beta.yml/**
   - /**/palo-beta.yml
+  - /**/tests
   - .gitlab-ci.yml
   - .gitmodules
 # parseable: true
