@@ -57,5 +57,14 @@ RUN set -ex ;\
     ansible-galaxy collection install --offline dsu-ccdc-1.0.0.tar.gz ;\
     rm -rf dsu-ccdc-1.0.0.tar.gz
 
-ENTRYPOINT [ "/bin/bash", "-c" ]
-CMD "top"
+
+RUN set -ex ;\
+    mkdir .ssh ;\
+    mkdir data ;\
+    chmod 700 .ssh ;\
+    chmod 700 data ;\
+    chown ansible:ansible .ssh ;\
+    chown ansible:ansible data
+
+ENTRYPOINT ["top", "-b"]
+# CMD "top"
