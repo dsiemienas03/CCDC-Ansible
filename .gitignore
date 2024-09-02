@@ -1,6 +1,8 @@
-fw*.yml
 .vscode/
 .venv/
+.ssh/**
+fw*.yml
 **/*.tgz
 **/*.tar.gz
 settings.json
+id_rsa**

@@ -14,4 +14,3 @@
     vmid: "{{ add_vm }}"
     state: present
     snapname: "{{ vm_id }}-{{ ansible_date_time.date }}-{{ ansible_date_time.hour }}-{{ ansible_date_time.minute }}"
-
