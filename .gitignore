@@ -1,6 +1,6 @@
 .vscode/
 .venv/
-.ssh/**
+data/**
 fw*.yml
 **/*.tgz
 **/*.tar.gz
