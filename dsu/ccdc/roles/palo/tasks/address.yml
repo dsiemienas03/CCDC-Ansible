@@ -24,11 +24,13 @@
     provider: "{{ provider }}"
     name: windc
     static_value: [dc1, dc2, dc3, dc4]
+
 - name: address | Add esx address group
   paloaltonetworks.panos.panos_address_group:
     provider: "{{ provider }}"
     name: esx
     static_value: [esx1, esx2, esx3, esx4]
+
 - name: address | Add windows address group
   paloaltonetworks.panos.panos_address_group:
     provider: "{{ provider }}"
