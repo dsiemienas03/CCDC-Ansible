@@ -39,6 +39,7 @@ RUN set -ex ;\
 
 COPY config/* ./ansible/config/
 COPY --chown=ansible:ansible fw-setup.sh .
+COPY --chown=ansible:ansible .ansible.cfg .
 # COPY palo/* ./ansible/palo/
 # COPY cisco/* ./ansible/cisco/
 # COPY pfsense/* ./ansible/pfsense/
@@ -61,10 +62,14 @@ RUN set -ex ;\
 RUN set -ex ;\
     mkdir .ssh ;\
     mkdir data ;\
+    mkdir vars ;\
     chmod 700 .ssh ;\
     chmod 700 data ;\
     chown ansible:ansible .ssh ;\
     chown ansible:ansible data
+
+# COPY --chown=ansible:ansible ansible/vars ./vars
+COPY --chown=ansible:ansible playbooks .
 
 ENTRYPOINT ["top", "-b"]
 # CMD "top"

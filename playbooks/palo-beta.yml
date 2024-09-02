@@ -6,7 +6,7 @@
     - dsu.ccdc.palo
   vars:
     provider:
-      ip_address: "{{ hostname }}"
+      ip_address: "{{ inventory_hostname }}"
       api_key: "{{ api_key }}"
 
 
@@ -15,9 +15,10 @@
       ansible.builtin.include_role:
         name: dsu.ccdc.palo
         vars_from: main.yml
+
     - name: Include IP vars
       ansible.builtin.include_vars:
-        dir: ../vars/
+        dir: vars/
     # - name: Show Facts
     #   ansible.builtin.debug:
     #     var: "{{update_os}}, {{logging}}"

@@ -1,25 +1,30 @@
 ---
 services:
   esx1:
-    ip: 0
+    ip: 20
     fw: 0
     service: esx
+
   esx2:
     ip: 0
     fw: 0
     service: esx
+
   esx3:
     ip: 0
     fw: 0
     service: esx
+
   esx4:
     ip: 0
     fw: 0
     service: esx
+
   esx5:
     ip: 0
     fw: 0
     service: esx
+
   esx6:
     ip: 0
     fw: 0
@@ -30,38 +35,47 @@ services:
     ip: 0
     fw: 0
     service: dc
+
   dc2:
     ip: 0
     fw: 0
     service: dc
+
   dc3:
     ip: 0
     fw: 0
     service: dc
+
   dc4:
     ip: 0
     fw: 0
     service: dc
+
   dc5:
     ip: 0
     fw: 0
     service: dc
+
   dc6:
     ip: 0
     fw: 0
     service: dc
+
   dc7:
     ip: 0
     fw: 0
     service: dc
+
   dc8:
     ip: 0
     fw: 0
     service: dc
+
   dc9:
     ip: 0
     fw: 0
     service: dc
+
   dc10:
     ip: 0
     fw: 0
@@ -72,38 +86,47 @@ services:
     ip: 0
     fw: 0
     service: dns
+
   dns2:
     ip: 0
     fw: 0
     service: dns
+
   dns3:
     ip: 0
     fw: 0
     service: dns
+
   dns4:
     ip: 0
     fw: 0
     service: dns
+
   dns5:
     ip: 0
     fw: 0
     service: dns
+
   dns6:
     ip: 0
     fw: 0
     service: dns
+
   dns7:
     ip: 0
     fw: 0
     service: dns
+
   dns8:
     ip: 0
     fw: 0
     service: dns
+
   dns9:
     ip: 0
     fw: 0
     service: dns
+
   dns10:
     ip: 0
     fw: 0
@@ -114,60 +137,74 @@ services:
     ip: 0
     fw: 0
     service: ssh
+
   ssh2:
     ip: 0
     fw: 0
     service: ssh
+
   ssh3:
     ip: 0
     fw: 0
     service: ssh
+
   ssh4:
     ip: 0
     fw: 0
     service: ssh
+
   ssh5:
     ip: 0
     fw: 0
     service: ssh
+
   ssh6:
     ip: 0
     fw: 0
     service: ssh
+
   ssh7:
     ip: 0
     fw: 0
     service: ssh
+
   ssh8:
     ip: 0
     fw: 0
     service: ssh
+
   ssh9:
     ip: 0
     fw: 0
     service: ssh
+
   ssh10:
     ip: 0
     fw: 0
     service: ssh
 
   # POP3
+
   pop1:
     ip: 0
     fw: 0
     service: pop
+
   pop2:
     ip: 0
     fw: 0
     service: pop
+
   pop3:
     ip: 0
     fw: 0
     service: pop
+
   pop4:
     ip: 0
     fw: 0
     service: pop
+
   pop5:
     ip: 0
     fw: 0
@@ -178,18 +215,22 @@ services:
     ip: 0
     fw: 0
     service: smtp
+
   smtp2:
     ip: 0
     fw: 0
     service: smtp
+
   smtp3:
     ip: 0
     fw: 0
     service: smtp
+
   smtp4:
     ip: 0
     fw: 0
     service: smtp
+
   smtp5:
     ip: 0
     fw: 0
@@ -200,30 +241,37 @@ services:
     ip: 0
     fw: 0
     service: http
+
   http2:
     ip: 0
     fw: 0
     service: http
+
   http3:
     ip: 0
     fw: 0
     service: http
+
   http4:
     ip: 0
     fw: 0
     service: http
+
   http5:
     ip: 0
     fw: 0
     service: http
+
   http6:
     ip: 0
     fw: 0
     service: http
+
   http7:
     ip: 0
     fw: 0
     service: http
+
   http8:
     ip: 0
     fw: 0
