@@ -15,7 +15,7 @@ read -p "Palo PW: " palo_pw
 api_key=$(curl -s -k -H "Content-Type: application/x-www-form-urlencoded" -X POST "https://${palo_ip}/api/?type=keygen" -d "user=admin&password=${palo_pw}" | grep -oP '(?<=<key>)[^<]+')
 
 # Output to fw.yml 
-cat >> data/fw.yml <<EOF
+cat >> data/inv.yml <<EOF
 palo:
   hosts:
     ${palo_ip}:
