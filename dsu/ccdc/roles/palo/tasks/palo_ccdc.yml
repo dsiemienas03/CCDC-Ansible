@@ -1,10 +1,18 @@
 ---
-- name: palo-ccdc |  | Inbound phone # Don't ask any questions it just needs to be
+- name: palo_ccdc | Show IPs
+  ansible.builtin.debug:
+    msg:
+      Phone White: "{{ phone_white }}"
+      CCS White: "{{ ccs_white }}"
+      Proxy White: "{{ proxy_white }}"
+      Mask White: "{{ mask_white }}"
+
+- name: palo_ccdc | Inbound phone # Don't ask any questions it just needs to be
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-phone
     source_zone: [wan]
-    source_ip: ["{{  phone_white }}"]
+    source_ip: ["{{ phone_white }}"]
     destination_zone: [lan]
     destination_ip: [any]
     application: [any]
@@ -14,7 +22,8 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Outbound phone
+
+- name: palo_ccdc | Outbound phone
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-phone
@@ -28,7 +37,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Outbound CCS
+- name: palo_ccdc | Outbound CCS
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-ccs
@@ -43,7 +52,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Outbound proxy
+- name: palo_ccdc | Outbound proxy
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-proxy
@@ -59,7 +68,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Outbound white team
+- name: palo_ccdc | Outbound white team
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: outbound-whiteteam
@@ -75,7 +84,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Inbound icmp
+- name: palo_ccdc | Inbound icmp
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-icmp
@@ -91,7 +100,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Inbound dp
+- name: palo_ccdc | Inbound dp
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-rdp
@@ -107,7 +116,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo-ccdc |  | Temp block wan
+- name: palo_ccdc | Temp block wan
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: temp-blockWan
