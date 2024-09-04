@@ -1,0 +1,6 @@
+services:
+  ansible:
+    image: ansible
+    volumes:
+      - ./data:/home/ansible/data
+      - ./data/ssh:/home/ansible/.ssh

@@ -1,7 +1,0 @@
-    plugin: community.vmware.vmware_host_inventory
-    strict: false
-    hostname: {{ ansible_host }}
-    username: root
-    password: {{ esxi_password }}
-    validate_certs: false
-    with_tags: true

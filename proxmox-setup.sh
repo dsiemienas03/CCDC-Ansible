@@ -1,6 +1,8 @@
 #!/usr/bin/env bash 
-read -p "Palo IP: " palo_ip
-read -p "Palo PW: " palo_pw
+read -p "Proxmox IP: " prox_ip
+read -p "Proxmox User: " prox_user
+read -p "Proxmox PW: " prox_pw
+
 
 # sudo apt update
 # sudo apt install -y ansible-core python3-pip
@@ -12,17 +14,15 @@ read -p "Palo PW: " palo_pw
 
 
 #Line below came from chatgpt
-api_key=$(curl -s -k -H "Content-Type: application/x-www-form-urlencoded" -X POST "https://${palo_ip}/api/?type=keygen" -d "user=admin&password=${palo_pw}" | grep -oP '(?<=<key>)[^<]+')
+# api_key=$(curl -s -k -H "Content-Type: application/x-www-form-urlencoded" -X POST "https://${prox_ip}/api/?type=keygen" -d "user=prox_user&password=${prox_pw}" | grep -oP '(?<=<key>)[^<]+')
 
 # Output to fw.yml 
 cat >> data/inv.yml <<EOF
-palo:
+proxmox:
   hosts:
-    ${palo_ip}:
+    ${prox_ip}:
   vars:
-    ip_address: ${palo_ip}
-    api_key: ${api_key}
-    fw: palo1
+    trust_in
 EOF
 
 cat ~/.ssh/id_rsa.pub

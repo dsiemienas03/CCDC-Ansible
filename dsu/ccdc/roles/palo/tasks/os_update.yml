@@ -1,12 +1,12 @@
 ---
 - name: os_update | PAN-OS_update
   ansible.builtin.debug:
-    msg: "{{ panos_version }}"
+    msg: "{{ palo_panos_version }}"
 
 - name: os_update | Download PAN-OS update
   paloaltonetworks.panos.panos_software:
     provider: "{{ provider }}"
-    version: "{{ panos_version }}"
+    version: "{{ palo_panos_version }}"
     install: true
     restart: true
   register: install_result
