@@ -1,6 +1,7 @@
 cffi>=1.16.0
 cryptography==41.0.7
 # packaging==24.1
+# Palo
 pan-os-python==1.12.1
 pan-python==0.17.0
 panos-upgrade-assurance==1.0.1
@@ -8,3 +9,18 @@ pathlib>=1.0.1
 pycparser>=2.22
 pyOpenSSL>=23.3.0
 xmltodict>=0.12.0
+
+
+# Cisco
+ansible>=2.8.8
+urllib3==1.24.2
+lxml>=4.2.6
+# kick library depends on unicon that is available for specific Pythons: https://pypi.org/project/unicon/#files
+# firepower-kickstart ;
+# ordereddict ; python_version >= '2.6'
+
+# VMware
+pyVmomi>=6.7.1
+git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version >= '2.7' 
+
+requests

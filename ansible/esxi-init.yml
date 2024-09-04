@@ -1,0 +1,9 @@
+- name: ESXI configuration
+  hosts: esxi
+  connection: local
+  ignore_errors: true
+  roles:
+    - esxi
+
+  tasks:
+    - name: Set ESXI 

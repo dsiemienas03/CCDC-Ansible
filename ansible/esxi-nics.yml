@@ -1,0 +1,21 @@
+---
+- name: ESXI test
+  hosts: esxi
+  ignore_errors: true
+  connection: ssh
+  gather_facts: true
+  roles:
+    - dsu.ccdc.esxi
+  vars:
+    esxi_user: root
+
+  tasks:
+    - name: Create protected vSwitch
+      ansible.builtin.import_role:
+        name: dsu.ccdc.esxi
+        tasks_from: vswitch
+
+    - name: Move VMs to protected vSwitch
+      ansible.builtin.import_role:
+        name: dsu.ccdc.esxi
+        tasks_from: nic_protected
