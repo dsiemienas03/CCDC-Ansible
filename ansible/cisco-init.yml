@@ -1,0 +1,27 @@
+---
+- name: Cisco configuration
+  hosts: cisco
+  connection: local
+  ignore_errors: true
+  tasks:
+    - name: Find an intrustion policy
+      community.network.ftd_configuration:
+        operation: getIntrusionPolicyList
+        register_as: policies
+
+    - name: Show policies
+      ansible.default.builtin.debug:
+        msg: "{{ policies }}"
+
+    - name: Create an access rule allowing trafic from Cisco DevNet
+      ftd_configuration:
+        operation: upsertAccessRule
+        data:
+          name: AllowCiscoTraffic
+          type: accessrule
+          sourceNetworks:
+          - '{{ networkobject_ciscodevnetnetwork }}'
+          ruleAction: PERMIT
+          eventLogAction: LOG_BOTH
+        path_params:
+          parentId: default

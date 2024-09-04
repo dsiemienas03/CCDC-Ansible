@@ -40,6 +40,8 @@
     application: [ldap, kerberos, ms-ds-smbv2, ms-ds-smbv3, ms-ds-smb-base, active-directory, msrpc]
     action: deny
     group_profile: security
+    location: after
+    existing_rule: inbound-vmware
     log_start: true
     log_end: true
     tag_name: [Critical]
@@ -48,7 +50,7 @@
     provider: "{{ provider }}"
     rule_name: outbound-dc-dns
     source_zone: [lan]
-    source_ip: [windc]
+    source_ip: ["{{ local_dns }}"]
     destination_zone: [wan]
     destination_ip: [1.1.1.1]
     application: [dns]
