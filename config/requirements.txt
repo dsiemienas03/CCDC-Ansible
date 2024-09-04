@@ -22,3 +22,5 @@ lxml>=4.2.6
 # VMware
 pyVmomi>=6.7.1
 git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version >= '2.7' 
+
+requests

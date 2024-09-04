@@ -1,8 +1,0 @@
-- name: change network for 00:50:56:11:22:33 on vm01.domain.fake
-  community.vmware.vmware_guest_network:
-    username: "{{ esxi_username }}"
-    password: "{{ esxi_password }}"
-    name: {{ vm_name }}
-    network_name: protected
-    state: present
-  loop: "{{ vm_list }}"
