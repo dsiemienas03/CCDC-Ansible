@@ -31,6 +31,7 @@
     datacenter: "{{ item.datacenter }}"
     validate_certs: false
     name: '{{ item.guest_name }}'
+    folder: "{{ item.folder }}"
   register: snapshot_info
 
 - name: snapshot | Print snapshot info
