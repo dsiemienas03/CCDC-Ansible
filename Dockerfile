@@ -54,7 +54,6 @@ SHELL ["/bin/bash", "-c"]
 RUN set -ex ;\
     python3.11 -m venv .venv ;\
     source .venv/bin/activate ;\
-    pip install --upgrade pip --no-cache-dir ;\
     pip install --break-system-packages --no-cache-dir \
     -r ./config/requirements.txt ;\
     \
