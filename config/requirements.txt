@@ -2,7 +2,7 @@ ansible>=2.8.8
 cffi==1.16.0
 cryptography==41.0.7
 git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version >= '2.7'  
-lxml==4.2.6
+lxml==4.9.1
 pan-os-python==1.12.1
 pan-python==0.17.0
 panos-upgrade-assurance==1.0.1
