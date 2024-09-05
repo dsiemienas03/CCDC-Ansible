@@ -17,7 +17,8 @@ RUN set -ex ;\
     git \
     python3 \
     python3-pip \
-    vim
+    vim ;\
+    rm -rf /var/lib/apt/lists/*
 
 # Install extra python stuff cause python
 RUN set -ex ;\
@@ -53,7 +54,7 @@ SHELL ["/bin/bash", "-c"]
 RUN set -ex ;\
     python3.11 -m venv .venv ;\
     source .venv/bin/activate ;\
-    pip install --upgrade pip ;\
+    pip install --upgrade pip --no-cache-dir ;\
     pip install --break-system-packages --no-cache-dir \
     -r ./config/requirements.txt ;\
     \
