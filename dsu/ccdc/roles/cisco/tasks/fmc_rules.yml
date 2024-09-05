@@ -1,5 +1,5 @@
 ---
-- name: ftd-rules | Accessrule
+- name: fmc_rules | Accessrule
   community.network.ftd_configuration:
     operation: upsertAccessRule
     data:

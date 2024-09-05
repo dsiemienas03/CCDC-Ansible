@@ -1,6 +1,8 @@
 #!/usr/bin/env bash 
 read -p "Palo IP: " palo_ip
 read -p "Palo PW: " palo_pw
+read -p "Cisco FTD IP: " ftd_ip
+read -p "Cisco FMC IP: " fmc_ip
 
 # sudo apt update
 # sudo apt install -y ansible-core python3-pip
@@ -23,9 +25,28 @@ palo:
     ip_address: ${palo_ip}
     api_key: ${api_key}
     fw: palo1
+
+esxi:
+  hosts:
+    10.60.60.20:
+      esxi_password: {{ ADD PASSWORD HERE }}
+    10.60.60.21:
+      esxi_password: {{ ADD PASSWORD HERE }}
+  vars:
+    ansible_user: root
+    esxi_password: {{ ADD PASSWORD HERE }}
+
+cisco:
+  hosts:
+    ${ftd_ip}:
+      username: admin
+      password: {{ ADD PASSWORD HERE }}
+      fw: fw2
+  vars:
+    ftd_ip: ${ftd_ip}
 EOF
 
 cat ~/.ssh/id_rsa.pub
-cat data/fw.yml
+cat data/inv.yml
 
-# sudo ansible-vault encrypt fw.yml
+# sudo ansible-vault encrypt inv.yml
