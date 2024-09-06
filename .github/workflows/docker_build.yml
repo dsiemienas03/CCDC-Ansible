@@ -93,7 +93,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
   
       - name: Extract Docker metadata
-        id: meta-docker
+        id: meta2
         uses: docker/metadata-action@v5.5.1
         with:
           images: ${{ env.IMAGE_NAME }}
@@ -112,8 +112,8 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           load: ${{ github.event_name == 'pull_request' }}
-          tags: ${{ steps.meta-docker.outputs.tags }}
-          labels: ${{ steps.meta-docker.outputs.labels }}
+          tags: ${{ steps.meta2.outputs.tags }}
+          labels: ${{ steps.meta2.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
