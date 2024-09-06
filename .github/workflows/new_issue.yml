@@ -1,4 +1,4 @@
-name: cleanup caches by a branch
+name: Create new branch for issues
 on:
   issues:
     types:
@@ -10,6 +10,5 @@ jobs:
       - name: Create Issue
         uses: robvanderleek/create-issue-branch@v1.5
         env:
-          branchName: '${issue.number}-${issue.title}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
