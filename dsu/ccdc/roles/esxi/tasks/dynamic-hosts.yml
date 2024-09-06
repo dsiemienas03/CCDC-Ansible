@@ -1,7 +1,0 @@
-plugin: community.vmware.vmware_host_inventory
-strict: false
-hostname: { { inventory_hostname } }
-username: root
-password: { { esxi_password } }
-validate_certs: false
-with_tags: true
