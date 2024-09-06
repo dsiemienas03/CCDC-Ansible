@@ -15,6 +15,7 @@
       </download></upgrade></wildfire></request>
     cmd_is_xml: true
   register: download
+
 - name: wildfire_update | Check content download result
   # wait for this job to finish
   paloaltonetworks.panos.panos_op:

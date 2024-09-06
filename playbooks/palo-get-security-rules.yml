@@ -5,7 +5,7 @@
 
   vars:
     provider:
-      ip_address: "{{ ip_address }}"
+      ip_address: "{{ inventory_hostname }}"
       api_key: "{{ api_key }}"
 
   # collections:
