@@ -1,0 +1,15 @@
+name: cleanup caches by a branch
+on:
+  issues:
+    types:
+      - opened
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Issue
+        uses: robvanderleek/create-issue-branch@v1.5
+        env:
+          branchName: '${issue.number}-${issue.title}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
