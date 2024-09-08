@@ -52,14 +52,14 @@ COPY --chown=ansible:ansible fw-setup.sh .
 
 SHELL ["/bin/bash", "-c"]
 
+RUN python3.11 -m venv .venv
 RUN set -ex ;\
-    python3.11 -m venv .venv ;\
     source .venv/bin/activate ;\
     pip install --break-system-packages --no-cache-dir \
-    -r ./config/requirements.txt ;\
+    -r config/requirements.txt ;\
     \
     ansible-galaxy collection install \
-    -r ./config/requirements.yml
+    -r config/requirements.yml
 
 COPY --chown=ansible:ansible dsu/ ./dsu/
 COPY --chown=ansible:ansible playbooks/ ./playbooks/
