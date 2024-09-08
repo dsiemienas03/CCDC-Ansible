@@ -58,7 +58,7 @@ RUN set -ex ;\
     -r ./config/requirements.txt ;\
     \
     ansible-galaxy collection install \
-    -r config/requirements.yml
+    -r ./config/requirements.yml
 
 COPY --chown=ansible:ansible dsu/ ./dsu/
 COPY --chown=ansible:ansible playbooks/ ./playbooks/
