@@ -122,13 +122,14 @@ jobs:
         id: docker-scout
         uses: docker/scout-action@v1
         with:
-          command: cves,recommendations,compare
+          # command: cves,recommendations,compare
+          command: recommendations
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:beta
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
           ignore-unchanged: false
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # to be able to write the comment
-          sarif-file: docker-scout.sarif
+          # sarif-file: docker-scout.sarif
 
       # - name: Upload analysis results to GitHub
       #   id: upload-sarif
