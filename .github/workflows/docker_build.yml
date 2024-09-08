@@ -29,6 +29,7 @@ jobs:
       contents: read
       packages: write
       pull-requests: write
+      security-events: write
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
@@ -119,17 +120,23 @@ jobs:
 
       - name: Docker Scout
         id: docker-scout
-        if: ${{ github.event_name == 'pull_request' }}
         uses: docker/scout-action@v1
         with:
-          command: compare
+          command: cves,recommendations,compare
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:beta
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
           ignore-unchanged: false
-          only-severities: critical,high,medium
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # to be able to write the comment
-          keep-previous-comments: true
+          sarif-file: docker-scout.sarif
+
+      # - name: Upload analysis results to GitHub
+      #   id: upload-sarif
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: docker-scout.sarif
+      #     wait-for-processing: true
       
       
       # # Sign the resulting Docker image digest except on PRs.
