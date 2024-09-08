@@ -122,7 +122,7 @@ jobs:
         if: ${{ github.event_name == 'pull_request' }}
         uses: docker/scout-action@v1
         with:
-          command: compare
+          command: cves,recommendations,compare
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:beta
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
           ignore-unchanged: false
@@ -132,6 +132,7 @@ jobs:
           sarif-file: docker-scout.sarif
 
       - name: Upload analysis results to GitHub
+        id: upload-sarif
         if: ${{ github.event_name != 'pull_request_target' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
