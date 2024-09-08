@@ -132,6 +132,7 @@ jobs:
           sarif-file: docker-scout.sarif
 
       - name: Upload analysis results to GitHub
+        if: ${{ github.event_name != 'pull_request_target' }}
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: docker-scout.sarif
