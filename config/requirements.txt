@@ -1,29 +1,15 @@
 ansible==10.3.0
-certifi==2024.8.30
 cffi==1.17.1
-charset-normalizer==3.3.2
 cryptography==41.0.7
-idna==3.8
-jinja2==3.1.4
+git+https://github.com/vmware/vsphere-automation-sdk-python.git ; python_version >= '2.7' 
 lxml==5.3.0
-MarkupSafe==2.1.5
-packaging==24.1
 pan-os-python==1.12.1
 pan-python==0.17.0
 panos-upgrade-assurance==1.0.1
 pathlib==1.0.1
 pycparser==2.22
-pyOpenSSL==23.2.0
-pyvmomi==8.0.3.0.1
-PyYAML==6.0.2
+pyOpenSSL==23.3.0
+pyVmomi==8.0.3.0.1
 requests==2.32.3
-resolvelib==1.0.1
-setuptools==74.1.2
-six==1.16.0
-typing_extensions==4.6.3
 urllib3==2.2.2
-vmware-vapi-common-client==2.52.0
-vmware-vapi-runtime==2.52.0
-vmware_vcenter==8.0.3.0
-vsphere-automation-sdk @ git+https://github.com/vmware/vsphere-automation-sdk-python.git@0e0b9321122e404cb49f6812dcea5bea792c49b2
 xmltodict==0.12.0
