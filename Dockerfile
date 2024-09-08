@@ -51,6 +51,7 @@ COPY --chown=ansible:ansible config/ ./config
 COPY --chown=ansible:ansible fw-setup.sh .
 
 SHELL ["/bin/bash", "-c"]
+
 RUN set -ex ;\
     python3.11 -m venv .venv ;\
     source .venv/bin/activate ;\
