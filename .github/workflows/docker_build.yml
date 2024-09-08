@@ -127,7 +127,6 @@ jobs:
           ignore-unchanged: false
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # to be able to write the comment
-          keep-previous-comments: true
           sarif-file: docker-scout.sarif
 
       - name: Upload analysis results to GitHub
