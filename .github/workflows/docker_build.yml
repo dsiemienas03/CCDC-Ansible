@@ -126,7 +126,6 @@ jobs:
           image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:beta
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
           ignore-unchanged: false
-          only-severities: critical,high,medium
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # to be able to write the comment
           keep-previous-comments: true
