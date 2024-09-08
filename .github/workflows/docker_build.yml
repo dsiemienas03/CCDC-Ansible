@@ -129,6 +129,13 @@ jobs:
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # to be able to write the comment
           keep-previous-comments: true
+          sarif-file: docker-scout.sarif
+
+      - name: Upload analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: docker-scout.sarif
+          wait-for-processing: true
       
       
       # # Sign the resulting Docker image digest except on PRs.
