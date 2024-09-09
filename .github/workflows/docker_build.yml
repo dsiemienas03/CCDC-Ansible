@@ -41,7 +41,7 @@ jobs:
       # https://github.com/sigstore/cosign-installer
       - name: Install cosign
         if: github.event_name != 'pull_request'
-        uses: sigstore/cosign-installer@v3.6.0 #v3.1.1
+        uses: sigstore/cosign-installer@v3.6.0 # v3.1.1
         with:
           cosign-release: "v2.2.4"
 
@@ -92,7 +92,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-  
+
       - name: Extract Docker metadata
         id: meta2
         uses: docker/metadata-action@v5.5.1
@@ -138,8 +138,7 @@ jobs:
       #   with:
       #     sarif_file: docker-scout.sarif
       #     wait-for-processing: true
-      
-      
+
       # # Sign the resulting Docker image digest except on PRs.
       # # This will only write to the public Rekor transparency log when the Docker
       # # repository is public to avoid leaking data.  If you would like to publish
