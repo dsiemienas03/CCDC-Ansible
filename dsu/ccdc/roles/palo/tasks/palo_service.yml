@@ -2,7 +2,7 @@
 - name: palo_service | Block WAN to esxi
   when:
     - item.value.ip != 0
-    - item.value.fw == 0
+    - item.value.fw == 'palo'
     - item.value.service == 'esx'
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -24,7 +24,7 @@
 - name: palo_service | Add SSH rules
   when:
     - item.value.ip != 0
-    - item.value.fw == 0
+    - item.value.fw == 'palo'
     - item.value.service == 'ssh'
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -46,7 +46,7 @@
 - name: palo_service | Add SMTP rules
   when:
     - item.value.ip != 0
-    - item.value.fw == 0
+    - item.value.fw == 'palo'
     - item.value.service == 'smtp'
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -68,7 +68,7 @@
 - name: palo_service | Add POP3 rules
   when:
     - item.value.ip != 0
-    - item.value.fw == 0
+    - item.value.fw == 'palo'
     - item.value.service == 'pop3'
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -90,7 +90,7 @@
 - name: palo_service | Add HTTP rules
   when:
     - item.value.ip != 0
-    - item.value.fw == 0
+    - item.value.fw == 'palo'
     - item.value.service == 'http'
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
