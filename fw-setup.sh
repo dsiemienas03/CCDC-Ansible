@@ -1,8 +1,9 @@
 #!/usr/bin/env bash 
-read -p "Palo IP: " palo_ip
-read -p "Palo PW: " palo_pw
-read -p "Cisco FTD IP: " ftd_ip
-read -p "Cisco FMC IP: " fmc_ip
+read -p "Palo IP: " PALO_IP
+read -p "Palo PW: " PALO_PW
+read -p "Cisco FTD IP: " FTD_IP
+read -p "Cisco FMC IP: " FMC_IP
+read -p "Cisco Password: " CISCO_PW
 
 # sudo apt update
 # sudo apt install -y ansible-core python3-pip
@@ -12,18 +13,18 @@ read -p "Cisco FMC IP: " fmc_ip
 
 # ssh-keygen -t rsa -b 4096 -C "ansible@localhost" -f ~/.ssh/id_rsa -N ""
 
-
 #Line below came from chatgpt
-api_key=$(curl -s -k -H "Content-Type: application/x-www-form-urlencoded" -X POST "https://${palo_ip}/api/?type=keygen" -d "user=admin&password=${palo_pw}" | grep -oP '(?<=<key>)[^<]+')
+API_KEY=$(curl -s -k -H "Content-Type: application/x-www-form-urlencoded" -X POST "https://$PALO_IP/api/?type=keygen" -d "user=admin&password=$PALO_PW" | grep -oP '(?<=<key>)[^<]+')
 
+echo $API_KEY
 # Output to fw.yml 
-cat >> data/inv.yml <<EOF
+cat > data/inv.yml <EOF
 palo:
   hosts:
-    ${palo_ip}:
+    $PALO_IP:
   vars:
-    ip_address: ${palo_ip}
-    api_key: ${api_key}
+    ip_address: $PALO_IP
+    api_key: $API_KEY
     fw: palo1
 
 esxi:
@@ -38,12 +39,12 @@ esxi:
 
 cisco:
   hosts:
-    ${ftd_ip}:
+    $FTD_IP:
       username: admin
       password: {{ ADD PASSWORD HERE }}
       fw: fw2
   vars:
-    ftd_ip: ${ftd_ip}
+    FTD_IP: $FTD_IP
 EOF
 
 cat ~/.ssh/id_rsa.pub
