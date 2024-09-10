@@ -12,11 +12,11 @@ ccs_white: 10.120.0.111
 proxy_white: 10.120.0.200
 
 # Critical IPs
-local_ip: 10.{{ team_num }}.{{ team_num }}.
-local_mask: "{{  local_ip }}0/24"
-local_dns: "{{ local_ip }}10"
-windc: "{{ local_ip }}10"
-wazuh: "{{ local_ip }}246"
+fw_net: 10.{{ team_num }}.{{ team_num }}.
+local_mask: "{{  fw_net }}0/24"
+local_dns: "{{ fw_net }}10"
+windc: "{{ fw_net }}10"
+wazuh: "{{ fw_net }}246"
 wazuh_port: "1516"
 
 # Remote IPS

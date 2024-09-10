@@ -14,14 +14,16 @@
     log_start: true
     log_end: true
     tag_name: [local]
-- name: palo_local | LAN to ESXI-1
+
+- name: palo_local | LAN to ESXI
+  when: (item.value.ip != 0) and (item.value.service == 'esx')
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: lan-esx1
+    rule_name: lan-{{  item.key }}
     source_zone: [lan]
     source_ip: [any]
-    destination_zone: [esx1]
-    destination_ip: ["{{ local_ip }}{{ esx1 }}"]
+    destination_zone: [any]
+    destination_ip: ["{{ fw_net }}{{ item.value.ip }}"]
     application: [vmware, ssl]
     action: allow
     location: after
@@ -30,34 +32,20 @@
     log_start: true
     log_end: true
     tag_name: [local]
-- name: palo_local | LAN to ESXI-2
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: lan-esx2
-    source_zone: [lan]
-    source_ip: [any]
-    destination_zone: [esx2]
-    destination_ip: ["{{ local_ip }}{{ esx2 }}"]
-    application: [vmware, ssl]
-    action: allow
-    location: after
-    existing_rule: lan-esx1
-    group_profile: security
-    log_start: true
-    log_end: true
-    tag_name: [local]
+  loop: "{{ services | dict2items }}"
+
 - name: palo_local | Add windows server rules
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: lan-winsrv
+    rule_name: lan-windc
     source_zone: [lan]
     source_ip: [any]
     destination_zone: [any]
-    destination_ip: ["{{ windc1 }}"]
-    application: [winsrv-apps]
+    destination_ip: ["windc"]
+    application: [winsrv]
     action: allow
     location: after
-    existing_rule: lan-esx2
+    existing_rule: mgt-to-all
     group_profile: security
     log_start: true
     log_end: true

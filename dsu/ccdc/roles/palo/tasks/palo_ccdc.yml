@@ -37,6 +37,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
+
 - name: palo_ccdc | Outbound CCS
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -52,6 +53,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
+
 - name: palo_ccdc | Outbound proxy
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -68,6 +70,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
+
 - name: palo_ccdc | Outbound white team
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -84,6 +87,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
+
 - name: palo_ccdc | Inbound icmp
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -100,7 +104,8 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-- name: palo_ccdc | Inbound dp
+
+- name: palo_ccdc | Inbound rdp
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-rdp
@@ -116,6 +121,7 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
+
 - name: palo_ccdc | Temp block wan
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"

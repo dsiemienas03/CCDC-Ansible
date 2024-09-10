@@ -6,33 +6,38 @@
     value: "{{  local_mask }}"
 
 - name: address | Add address objects
-  when:
-    - item.value.ip != 0
-    - item.value.fw == 0
-    - item.value.service == 'dns' or
-    - item.value.service == 'esx' or
-    - item.value.service == 'ssh' or
-    - item.value.service == 'dc'
+  when: (item.value.ip != 0) and
+    (item.value.service == 'dns' or
+    item.value.service == 'esx' or
+    item.value.service == 'ssh' or
+    item.value.service == 'dc')
   paloaltonetworks.panos.panos_address_object:
     provider: "{{ provider }}"
     name: "{{ item.key }}"
-    value: "{{ local_ip }}{{ item.value.ip }}"
+    value: "{{ fw_net }}{{ item.value.ip }}"
+    tag: "{{ item.value.service }}"
   loop: "{{ services | dict2items }}"
 
 - name: address | Add windows server address group
+  when: (item.value.ip != 0) and (item.value.service == 'dc')
   paloaltonetworks.panos.panos_address_group:
     provider: "{{ provider }}"
     name: windc
-    static_value: [dc1, dc2, dc3, dc4]
+    dynamic_value: dc
+  loop: "{{ services | dict2items }}"
 
 - name: address | Add esx address group
+  when: (item.value.ip != 0) and (item.value.service == 'esx')
   paloaltonetworks.panos.panos_address_group:
     provider: "{{ provider }}"
-    name: esx
-    static_value: [esx1, esx2, esx3, esx4]
+    name: esxi
+    dynamic_value: esx
+  loop: "{{ services | dict2items }}"
 
 - name: address | Add windows address group
+  when: (item.value.ip != 0) and (item.value.service == 'windows')
   paloaltonetworks.panos.panos_address_group:
     provider: "{{ provider }}"
     name: windows
-    static_value: win1
+    dynamic_value: windows
+  loop: "{{ services | dict2items }}"

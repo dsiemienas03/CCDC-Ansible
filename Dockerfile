@@ -61,14 +61,16 @@ RUN set -ex ;\
     ansible-galaxy collection install \
     -r config/requirements.yml
 
-COPY --chown=ansible:ansible dsu/ ./dsu/
 COPY --chown=ansible:ansible playbooks/ ./playbooks/
+COPY --chown=ansible:ansible .ansible.cfg .
+COPY --chown=ansible:ansible dsu/ ./dsu/
 
 RUN set -ex ;\
     ls -ls ;\
     ansible-galaxy collection build dsu/ccdc/ ;\
     ansible-galaxy collection install --offline dsu-ccdc-1.0.0.tar.gz ;\
-    rm -rf dsu-ccdc-1.0.0.tar.gz 
+    rm -rf dsu-ccdc-1.0.0.tar.gz ;\
+    echo "source .venv/bin/activate" >> /home/ansible/.bashrc
 
 ENTRYPOINT ["top", "-b"]
 # CMD "top"

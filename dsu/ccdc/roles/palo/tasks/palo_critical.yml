@@ -13,21 +13,21 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
-- name: palo_critical | Inbound-block-vmware
+
+- name: palo_critical | Inbound block vmware
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-vmware
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [any]
-    destination_ip: [esx]
+    destination_ip: [esxi]
     application: [vmware, vmware-update, vmware-view]
     action: deny
     group_profile: security
     log_start: true
     log_end: true
     tag_name: [Critical]
-    disabled: true
 
 - name: palo_critical | Inbound block active directory
   paloaltonetworks.panos.panos_security_rule:
@@ -45,6 +45,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
+
 - name: palo_critical | Allow DC access to DNS
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -61,6 +62,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
+
 # Allow all traffic
 - name: palo_critical | Allow all traffic in
   paloaltonetworks.panos.panos_security_rule:
@@ -76,6 +78,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical, ALLOW ALL]
+
 - name: palo_critical | Allow web outbound
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -90,6 +93,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
+
 - name: palo_critical | Block DNS outbound
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -104,6 +108,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
+
 - name: palo_critical | Allow all traffic out
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -118,20 +123,22 @@
     log_start: true
     log_end: true
     tag_name: [Critical, ALLOW ALL]
+
 - name: palo_critical | Add windows server rules
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: lan-winsrv
+    rule_name: lan-windc
     source_zone: [lan]
     source_ip: [windows]
-    destination_zone: [winsrv]
-    destination_ip: [winsrv]
-    application: [winsrv-apps]
+    destination_zone: [any]
+    destination_ip: [windc]
+    application: [windc]
     action: allow
     group_profile: security
     log_start: true
     log_end: true
     tag_name: [Critical]
+
 - name: palo_critical | Add outbound block rule
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -146,15 +153,16 @@
     log_start: true
     log_end: true
     tag_name: [Critical, BLOCK ALL]
+
 - name: palo_critical | Add windows WAN block server rules
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: wan-win-srv
+    rule_name: wan-windc
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [any]
-    destination_ip: ["{{ windc }}"]
-    application: [winsrv-apps]
+    destination_ip: ["windc"]
+    application: [windc]
     action: deny
     location: before
     existing_rule: outbound-dns
@@ -162,6 +170,7 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
+
 - name: palo_critical | Add inbound block rule
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
