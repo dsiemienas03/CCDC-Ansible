@@ -1,27 +1,38 @@
 ---
 # pfSense critical block rules
-- name: "Add Internal DNS out rule"
-  pfsense_rule:
-    name: 'outbound-dns'
-    action: pass
-    interface: lan
-    ipprotocol: inet
-    protocol: udp
-    source: lan
-    destination: any
-    destination_port: 53
-    after: 'Allow proxies out'
-    state: present
+    - name: Anti-lockout rule
+      pfsensible.core.pfsense_rule:
+        name: anti-lockout
+        action: pass
+        interface: WAN
+        ipprotocol: inet
+        protocol: tcp
+        source: any
+        destination: "{{ inventory_hostname }}"
+        destination_port: 443
+        state: present
+    - name: Add Internal DNS out rule
+      pfsensible.core.pfsense_rule:
+        name: outbound-dns
+        action: pass
+        interface: WAN
+        ipprotocol: inet
+        protocol: udp
+        source: LAN
+        destination: any
+        destination_port: 53
+        after: anti-lockout
+        state: present
 
-- name: "Add Internal web out rule"
-  pfsense_rule:
-    name: 'outbound-web'
-    action: pass
-    interface: lan
-    ipprotocol: inet
-    protocol: tcp
-    source: lan
-    destination: any
-    destination_port: [80,443]
-    after: 'Allow proxies out'
-    state: present
+    - name: Add Internal web out rule
+      pfsensible.core.pfsense_rule:
+        name: "outbound-web"
+        action: pass
+        interface: WAN
+        ipprotocol: inet
+        protocol: tcp
+        source: LAN
+        destination: any
+        destination_port: 80
+        after: anti-lockout
+        state: present
