@@ -1,0 +1,27 @@
+---
+# pfSense critical block rules
+- name: "Add Internal DNS out rule"
+  pfsense_rule:
+    name: 'outbound-dns'
+    action: pass
+    interface: lan
+    ipprotocol: inet
+    protocol: udp
+    source: lan
+    destination: any
+    destination_port: 53
+    after: 'Allow proxies out'
+    state: present
+
+- name: "Add Internal web out rule"
+  pfsense_rule:
+    name: 'outbound-web'
+    action: pass
+    interface: lan
+    ipprotocol: inet
+    protocol: tcp
+    source: lan
+    destination: any
+    destination_port: [80,443]
+    after: 'Allow proxies out'
+    state: present

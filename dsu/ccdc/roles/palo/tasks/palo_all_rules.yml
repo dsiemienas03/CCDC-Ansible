@@ -1,29 +1,29 @@
 ---
-- name: palo_rules | Add CCDC firewall Rules
+- name: palo_all_rules | Add CCDC firewall Rules
   ansible.builtin.import_role:
     name: dsu.ccdc.palo
     tasks_from: palo_ccdc
   when: palo_config_initial_rules
 
-- name: palo_rules |  Add local firewall Rules
+- name: palo_all_rules |  Add local firewall Rules
   ansible.builtin.import_role:
     name: dsu.ccdc.palo
     tasks_from: palo_local
   when: palo_config_initial_rules
 
-- name: palo_rules | Add block firewall rules
+- name: palo_all_rules | Add block firewall rules
   ansible.builtin.import_role:
     name: dsu.ccdc.palo
     tasks_from: palo_critical
   when: palo_config_initial_rules
 
-- name: palo_rules |  Add comp firewall rules
+- name: palo_all_rules |  Add comp firewall rules
   ansible.builtin.import_role:
     name: dsu.ccdc.palo
     tasks_from: palo_service
   when: palo_config_initial_rules
 
-- name: palo_rules | Commit rule changes
+- name: palo_all_rules | Commit rule changes
   ansible.builtin.import_role:
     name: dsu.ccdc.palo
     tasks_from: commit
