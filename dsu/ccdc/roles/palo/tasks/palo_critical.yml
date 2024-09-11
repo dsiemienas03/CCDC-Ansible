@@ -202,8 +202,3 @@
     log_start: true
     log_end: true
     tag_name: [Critical]
-
-# - name: palo_critical | Set initial rules as done
-#   set_fact:
-#     config_initial_rules: "n"
-#     cacheable: true

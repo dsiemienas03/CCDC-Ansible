@@ -27,7 +27,7 @@
     application: [vmware, ssl]
     action: allow
     location: after
-    existing_rule: mgt-to-all
+    existing_rule: mgt-all
     group_profile: security
     log_start: true
     log_end: true
