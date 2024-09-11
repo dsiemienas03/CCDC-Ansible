@@ -17,7 +17,8 @@ RUN set -ex ;\
     git \
     python3 \
     python3-pip \
-    vim ;\
+    vim \
+    tmux ;\
     rm -rf /var/lib/apt/lists/*
 
 # Install extra python stuff cause python
