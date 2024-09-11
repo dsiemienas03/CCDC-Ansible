@@ -2,7 +2,7 @@
 - name: palo_local | Management to all
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: mgt-to-all
+    rule_name: mgt-all
     source_zone: [mgt]
     source_ip: [any]
     destination_zone: [any]
