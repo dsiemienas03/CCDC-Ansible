@@ -17,7 +17,8 @@ RUN set -ex ;\
     git \
     python3 \
     python3-pip \
-    vim ;\
+    vim \
+    tmux ;\
     rm -rf /var/lib/apt/lists/*
 
 # Install extra python stuff cause python
@@ -61,8 +62,9 @@ RUN set -ex ;\
     ansible-galaxy collection install \
     -r config/requirements.yml
 
-COPY --chown=ansible:ansible dsu/ ./dsu/
 COPY --chown=ansible:ansible playbooks/ ./playbooks/
+COPY --chown=ansible:ansible .ansible.cfg .
+COPY --chown=ansible:ansible dsu/ ./dsu/
 
 RUN set -ex ;\
     ls -ls ;\

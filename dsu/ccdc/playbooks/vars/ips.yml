@@ -1,6 +1,6 @@
 ---
 # vars file for ccdc
-team_num: 70
+team_num: 60
 palo_ip: 10.{{ team_num }}.{{ team_num }}.250
 
 # Whiteteam IPs
