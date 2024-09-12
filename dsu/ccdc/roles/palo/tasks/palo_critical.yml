@@ -14,42 +14,10 @@
     log_end: true
     tag_name: [Critical]
 
-- name: palo_critical | Inbound block vmware
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: inbound-vmware
-    source_zone: [wan]
-    source_ip: [any]
-    destination_zone: [any]
-    destination_ip: [esxi]
-    application: [vmware, vmware-update, vmware-view]
-    action: deny
-    group_profile: security
-    log_start: true
-    log_end: true
-    tag_name: [Critical]
-
-- name: palo_critical | Inbound block active directory
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: inbound-dc
-    source_zone: [wan]
-    source_ip: [any]
-    destination_zone: [lan]
-    destination_ip: [any]
-    application: [ldap, kerberos, ms-ds-smbv2, ms-ds-smbv3, ms-ds-smb-base, active-directory, msrpc]
-    action: deny
-    group_profile: security
-    location: after
-    existing_rule: inbound-vmware
-    log_start: true
-    log_end: true
-    tag_name: [Critical]
-
 - name: palo_critical | Allow DC access to DNS
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: outbound-dc-dns
+    rule_name: outbound-dns
     source_zone: [lan]
     source_ip: ["{{ local_dns }}"]
     destination_zone: [wan]
@@ -58,7 +26,7 @@
     action: allow
     group_profile: security
     location: after
-    existing_rule: inbound-vmware
+    existing_rule: inbound-sql
     log_start: true
     log_end: true
     tag_name: [Critical]
@@ -97,7 +65,7 @@
 - name: palo_critical | Block DNS outbound
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: outbound-dns
+    rule_name: outbound-DNS
     source_zone: [any]
     source_ip: [any]
     destination_zone: [wan]
@@ -112,7 +80,7 @@
 - name: palo_critical | Allow all traffic out
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: outbound-all
+    rule_name: outbound-ALLOW
     source_zone: [lan]
     source_ip: [any]
     destination_zone: [any]
@@ -124,25 +92,10 @@
     log_end: true
     tag_name: [Critical, ALLOW ALL]
 
-- name: palo_critical | Add windows server rules
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: lan-windc
-    source_zone: [lan]
-    source_ip: [windows]
-    destination_zone: [any]
-    destination_ip: [windc]
-    application: [windc]
-    action: allow
-    group_profile: security
-    log_start: true
-    log_end: true
-    tag_name: [Critical]
-
 - name: palo_critical | Add outbound block rule
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: outbound-block-all
+    rule_name: outbound-all
     source_zone: [any]
     source_ip: [lan]
     destination_zone: [any]
@@ -154,27 +107,10 @@
     log_end: true
     tag_name: [Critical, BLOCK ALL]
 
-- name: palo_critical | Add windows WAN block server rules
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: wan-windc
-    source_zone: [wan]
-    source_ip: [any]
-    destination_zone: [any]
-    destination_ip: ["windc"]
-    application: [windc]
-    action: deny
-    location: before
-    existing_rule: outbound-dns
-    group_profile: security
-    log_start: true
-    log_end: true
-    tag_name: [Critical]
-
 - name: palo_critical | Add inbound block rule
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: inbound-block-all
+    rule_name: inbound-ALLOW
     source_zone: [wan]
     source_ip: [any]
     destination_zone: [lan]
@@ -185,20 +121,36 @@
     log_start: true
     log_end: true
     tag_name: [Critical, BLOCK ALL]
-# Safety rule
-- name: palo_critical | Inbound safety
+
+
+- name: palo_critical | Tmp block wan
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: inbound-safety
+    rule_name: tmp-block
     source_zone: [wan]
     source_ip: [any]
-    destination_zone: [lan]
-    destination_ip: [1.1.1.1]
+    destination_zone: [any]
+    destination_ip: [9.9.9.9]
+    application: [any]
     action: deny
     group_profile: security
-    disabled: true
-    location: before
-    existing_rule: inbound-all
+    location: after
+    existing_rule: outbound-dns
     log_start: true
     log_end: true
-    tag_name: [Critical]
+
+- name: palo_critical | Management to all
+  paloaltonetworks.panos.panos_security_rule:
+    provider: "{{ provider }}"
+    rule_name: mgt-all
+    source_zone: [mgt]
+    source_ip: [any]
+    destination_zone: [any]
+    destination_ip: [any]
+    application: [any]
+    action: allow
+    location: after
+    existing_rule: inbound-rdp
+    log_start: true
+    log_end: true
+    tag_name: [local]

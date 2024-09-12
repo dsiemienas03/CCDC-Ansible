@@ -1,52 +1,76 @@
 ---
-- name: palo_local | Management to all
+- name: palo_local | LAN to DC
+  when: ("dc" in item.value.svc)
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: mgt-to-all
-    source_zone: [mgt]
+    rule_name: lan-windc{{ item.key }}
+    source_zone: [lan]
     source_ip: [any]
-    destination_zone: [any]
-    destination_ip: [any]
-    application: [any]
+    destination_zone: ["{{ item.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    application: [windc]
     action: allow
-    location: after
-    existing_rule: inbound-rdp
+    location: before
+    existing_rule: tmp-block
+    group_profile: security
     log_start: true
     log_end: true
     tag_name: [local]
+  loop: "{{ services.palo | dict2items }}"
 
 - name: palo_local | LAN to ESXI
-  when: (item.value.ip != 0) and (item.value.service == 'esx')
+  when: ( "esx" in item.value.svc)
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: lan-{{  item.key }}
+    rule_name: lan-esx{{ item.key }}
     source_zone: [lan]
     source_ip: [any]
-    destination_zone: [any]
-    destination_ip: ["{{ fw_net }}{{ item.value.ip }}"]
+    destination_zone: ["{{ item.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
     application: [vmware, ssl]
     action: allow
-    location: after
-    existing_rule: mgt-all
+    location: before
+    existing_rule: tmp-block
     group_profile: security
     log_start: true
     log_end: true
     tag_name: [local]
-  loop: "{{ services | dict2items }}"
+  loop: "{{ services.palo | dict2items }}"
 
-- name: palo_local | Add windows server rules
+- name: palo_local | Block WAN to DC
+  when: ("dc" in item.value.svc)
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: lan-windc
-    source_zone: [lan]
+    rule_name: inbound-dc{{ item.key }}
+    source_zone: [wan]
     source_ip: [any]
-    destination_zone: [any]
-    destination_ip: ["windc"]
-    application: [winsrv]
-    action: allow
-    location: after
-    existing_rule: mgt-to-all
+    destination_zone: ["{{ ip.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    application: [windc]
+    action: deny
+    group_profile: security
+    location: before
+    existing_rule: tmp-block
+    log_start: true
+    log_end: true
+    tag_name: [Critical]
+  loop: "{{ services.palo | dict2items }}"
+
+- name: palo_local | Block WAN to ESXI
+  when: ("esx" in item.value.svc)
+  paloaltonetworks.panos.panos_security_rule:
+    provider: "{{ provider }}"
+    rule_name: inbound-esx{{ item.key }}
+    source_zone: [wan]
+    source_ip: [any]
+    destination_zone: ["{{ ip.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    application: [any]
+    action: deny
+    location: before
+    existing_rule: tmp-block
     group_profile: security
     log_start: true
     log_end: true
-    tag_name: [local]
+    tag_name: [Critical]
+  loop: "{{ services.palo | dict2items }}"

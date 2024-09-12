@@ -121,19 +121,3 @@
     log_start: true
     log_end: true
     tag_name: [CCDC]
-
-- name: palo_ccdc | Temp block wan
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: temp-blockWan
-    source_zone: [wan]
-    source_ip: [any]
-    destination_zone: [any]
-    destination_ip: [9.9.9.9]
-    application: [any]
-    action: deny
-    group_profile: security
-    location: after
-    existing_rule: inbound-rdp
-    log_start: true
-    log_end: true
