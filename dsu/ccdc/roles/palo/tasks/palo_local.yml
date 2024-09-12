@@ -1,64 +1,80 @@
 ---
-- name: palo_local | Management to all
+- name: palo_local | LAN to DC
+  when: ("dc" in item.value.svc)
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: mgt-to-all
-    source_zone: [mgt]
+    rule_name: lan-windc{{ item.key }}
+    source_zone: [lan]
     source_ip: [any]
-    destination_zone: [any]
-    destination_ip: [any]
+    destination_zone: ["{{ item.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    application: [windc]
+    action: allow
+    location: before
+    existing_rule: tmp-block
+    group_profile: security
+    log_start: true
+    log_end: true
+    log_setting: "Loggie McLog Face"
+    tag_name: [local]
+  loop: "{{ services.palo | dict2items }}"
+
+- name: palo_local | LAN to ESXI
+  when: ( "esx" in item.value.svc)
+  paloaltonetworks.panos.panos_security_rule:
+    provider: "{{ provider }}"
+    rule_name: lan-esx{{ item.key }}
+    source_zone: [lan]
+    source_ip: [any]
+    destination_zone: ["{{ item.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    application: [vmware, ssl]
+    action: allow
+    location: before
+    existing_rule: tmp-block
+    group_profile: security
+    log_start: true
+    log_end: true
+    log_setting: "Loggie McLog Face"
+    tag_name: [local]
+  loop: "{{ services.palo | dict2items }}"
+
+- name: palo_local | Block WAN to DC
+  when: ("dc" in item.value.svc)
+  paloaltonetworks.panos.panos_security_rule:
+    provider: "{{ provider }}"
+    rule_name: inbound-dc{{ item.key }}
+    source_zone: [wan]
+    source_ip: [any]
+    destination_zone: ["{{ ip.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    application: [windc]
+    action: deny
+    group_profile: security
+    location: before
+    existing_rule: tmp-block
+    log_start: true
+    log_end: true
+    log_setting: "Loggie McLog Face"
+    tag_name: [Critical]
+  loop: "{{ services.palo | dict2items }}"
+
+- name: palo_local | Block WAN to ESXI
+  when: ("esx" in item.value.svc)
+  paloaltonetworks.panos.panos_security_rule:
+    provider: "{{ provider }}"
+    rule_name: inbound-esx{{ item.key }}
+    source_zone: [wan]
+    source_ip: [any]
+    destination_zone: ["{{ ip.value.zone | default('lan') }}"]
+    destination_ip: ["{{ fw_net }}{{ item.key }}"]
     application: [any]
-    action: allow
-    location: after
-    existing_rule: inbound-rdp
-    log_start: true
-    log_end: true
-    tag_name: [local]
-- name: palo_local | LAN to ESXI-1
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: lan-esx1
-    source_zone: [lan]
-    source_ip: [any]
-    destination_zone: [esx1]
-    destination_ip: ["{{ local_ip }}{{ esx1 }}"]
-    application: [vmware, ssl]
-    action: allow
-    location: after
-    existing_rule: mgt-to-all
+    action: deny
+    location: before
+    existing_rule: tmp-block
     group_profile: security
     log_start: true
     log_end: true
-    tag_name: [local]
-- name: palo_local | LAN to ESXI-2
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: lan-esx2
-    source_zone: [lan]
-    source_ip: [any]
-    destination_zone: [esx2]
-    destination_ip: ["{{ local_ip }}{{ esx2 }}"]
-    application: [vmware, ssl]
-    action: allow
-    location: after
-    existing_rule: lan-esx1
-    group_profile: security
-    log_start: true
-    log_end: true
-    tag_name: [local]
-- name: palo_local | Add windows server rules
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: lan-winsrv
-    source_zone: [lan]
-    source_ip: [any]
-    destination_zone: [any]
-    destination_ip: ["{{ windc1 }}"]
-    application: [winsrv-apps]
-    action: allow
-    location: after
-    existing_rule: lan-esx2
-    group_profile: security
-    log_start: true
-    log_end: true
-    tag_name: [local]
+    log_setting: "Loggie McLog Face"
+    tag_name: [Critical]
+  loop: "{{ services.palo | dict2items }}"
