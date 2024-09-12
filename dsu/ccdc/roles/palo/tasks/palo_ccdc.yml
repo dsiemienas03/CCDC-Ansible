@@ -21,6 +21,7 @@
     location: top # Keep it this way or your life will be ruined
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Outbound phone
@@ -36,6 +37,7 @@
     existing_rule: inbound-phone
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Outbound CCS
@@ -52,6 +54,7 @@
     location: after
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Outbound proxy
@@ -69,6 +72,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Outbound white team
@@ -86,6 +90,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Inbound icmp
@@ -103,6 +108,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Inbound rdp
@@ -120,4 +126,5 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]

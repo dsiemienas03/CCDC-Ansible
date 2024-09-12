@@ -15,6 +15,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [local]
   loop: "{{ services.palo | dict2items }}"
 
@@ -34,6 +35,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [local]
   loop: "{{ services.palo | dict2items }}"
 
@@ -53,6 +55,7 @@
     existing_rule: tmp-block
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical]
   loop: "{{ services.palo | dict2items }}"
 
@@ -72,5 +75,6 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical]
   loop: "{{ services.palo | dict2items }}"
