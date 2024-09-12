@@ -10,7 +10,7 @@
   paloaltonetworks.panos.panos_tag_object:
     provider: "{{ provider }}"
     name: BLOCK ALL
-    color: orange
+    color: red-orange
     comments: Block all traffic
 
 - name: tags | Create tag object ALLOW ALL
@@ -57,3 +57,9 @@
   paloaltonetworks.panos.panos_tag_object:
     provider: "{{ provider }}"
     name: windows
+
+- name: tags | Create tag object Block
+  paloaltonetworks.panos.panos_tag_object:
+    provider: "{{ provider }}"
+    name: BLOCK
+    color: orange

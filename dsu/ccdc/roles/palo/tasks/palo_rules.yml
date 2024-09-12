@@ -19,11 +19,11 @@
   ansible.builtin.include_tasks: palo_local.yml
 
 - name: palo_rules | Add service rules
-  when: ("esx" not in ip.value)
+  when: ("esx" not in host.value)
   ansible.builtin.include_tasks: palo_service.yml
   loop: "{{ services.palo | dict2items }}"
   loop_control:
-    loop_var: ip
+    loop_var: host
 
 - name: palo_rules | Commit rule changes
   ansible.builtin.import_role:

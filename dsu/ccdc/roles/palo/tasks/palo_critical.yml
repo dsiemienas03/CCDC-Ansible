@@ -12,6 +12,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical]
 
 - name: palo_critical | Allow DC access to DNS
@@ -29,6 +30,7 @@
     existing_rule: inbound-sql
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical]
 
 # Allow all traffic
@@ -46,6 +48,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical, ALLOW ALL]
 
 - name: palo_critical | Allow web outbound
@@ -61,6 +64,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical]
 
 - name: palo_critical | Block DNS outbound
@@ -76,6 +80,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical]
 
 - name: palo_critical | Allow all traffic out
@@ -91,6 +96,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical, ALLOW ALL]
 
 - name: palo_critical | Add outbound block rule
@@ -106,6 +112,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical, BLOCK ALL]
 
 - name: palo_critical | Add inbound block rule
@@ -121,6 +128,7 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [Critical, BLOCK ALL]
 
 
@@ -139,6 +147,7 @@
     existing_rule: outbound-dns
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
 
 - name: palo_critical | Management to all
   paloaltonetworks.panos.panos_security_rule:
@@ -154,4 +163,5 @@
     existing_rule: inbound-rdp
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [local]
