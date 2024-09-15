@@ -11,8 +11,9 @@
     provider: "{{ provider }}"
     syslog_profile: wazzuh-profile
     name: wazuh-server
-    server: "{{ local_ip }}{{ wazuh }}"
+    server: "{{ wazuh }}"
     syslog_port: "{{ wazuh_port }}"
+    transport: "{{ wazuh_protocol | default('UDP') }}"
 
 - name: logging | Create log forwarding profile
   paloaltonetworks.panos.panos_log_forwarding_profile:
