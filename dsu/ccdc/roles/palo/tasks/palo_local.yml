@@ -78,4 +78,3 @@
     log_setting: "Loggie McLog Face"
     tag_name: [local]
   loop: "{{ services.palo | dict2items }}"
-  

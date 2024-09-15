@@ -18,6 +18,9 @@
 - name: rules | Add local firewall Rules
   ansible.builtin.include_tasks: palo_local.yml
 
+- name: rules | Add remote network rules
+  ansible.builtin.include_tasks: palo_remote.yml
+
 - name: rules | Add service rules
   when: ("esx" not in host.value)
   ansible.builtin.include_tasks: palo_service.yml
