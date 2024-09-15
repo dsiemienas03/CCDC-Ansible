@@ -70,20 +70,12 @@
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
         tasks_from: zones
-      when: palo_config_zones
 
     # Interfaces
     - name: Add interfaces
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
-        tasks_from: initial_interfaces
-      when: palo_config_initial_interface
-
-    # Commit changes
-    - name: Commit interface changes
-      ansible.builtin.import_role:
-        name: dsu.ccdc.palo
-        tasks_from: commit
+        tasks_from: interfaces
       when: palo_config_initial_interface
 
     - name: Set interfaces and zones complete
@@ -112,12 +104,6 @@
         tasks_from: service_group
       when: palo_config_initial_groups
 
-    - name: Commit object changes
-      ansible.builtin.import_role:
-        name: dsu.ccdc.palo
-        tasks_from: commit
-      when: palo_config_initial_groups
-
     - name: Set initial names completed
       ansible.builtin.set_fact:
         palo_config_initial_groups: false
@@ -128,13 +114,7 @@
     - name: Add logging
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
-        tasks_from: initial_logging
-      when: palo_config_logging
-
-    - name: Commit logging changes
-      ansible.builtin.import_role:
-        name: dsu.ccdc.palo
-        tasks_from: commit
+        tasks_from: logging
       when: palo_config_logging
 
     - name: Set logging complete
@@ -158,7 +138,7 @@
     - name: Add firewall rules
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
-        tasks_from: palo_rules
+        tasks_from: rules
 
     - name: Commit rule changes
       ansible.builtin.import_role:

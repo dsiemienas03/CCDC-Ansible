@@ -1,5 +1,5 @@
 ---
-- name: palo_service | Create service rules
+- name: palo_service | Add service rules
   when: item.key not in fw_block
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -7,8 +7,8 @@
     source_zone: [wan]
     source_ip: [any]
     destination_zone: ["{{ host.value.zone | default('lan') }}"]
-    destination_ip: ["{{ item.value.ip |  default(fw_net ~ host.key) }}"]
-    application: "{{ palo_svc[item.key] }}"
+    destination_ip: ["{{ host.value.ip |  default(fw_net ~ host.key) }}"]
+    application: "{{ palo.svc[item.key] }}"
     action: allow
     location: before
     existing_rule: inbound-all

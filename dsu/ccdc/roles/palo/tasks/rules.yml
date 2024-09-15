@@ -1,31 +1,31 @@
 ---
-- name: palo_rules | Add CCDC firewall Rules
+- name: rules | Add CCDC firewall Rules
   ansible.builtin.include_tasks: palo_ccdc.yml
   when: palo_config_initial_rules
 
 
-- name: palo_rules | Add critical firewall rules
+- name: rules | Add critical firewall rules
   ansible.builtin.include_tasks: palo_critical.yml
   when: palo_config_initial_rules
 
 
-- name: palo_rules | Finished initial rules
+- name: rules | Finished initial rules
   ansible.builtin.set_fact:
     palo_config_initial_rules: false
     cacheable: true
   when: palo_config_initial_rules
 
-- name: palo_rules | Add local firewall Rules
+- name: rules | Add local firewall Rules
   ansible.builtin.include_tasks: palo_local.yml
 
-- name: palo_rules | Add service rules
+- name: rules | Add service rules
   when: ("esx" not in host.value)
   ansible.builtin.include_tasks: palo_service.yml
   loop: "{{ services.palo | dict2items }}"
   loop_control:
     loop_var: host
 
-- name: palo_rules | Commit rule changes
+- name: rules | Commit rule changes
   ansible.builtin.import_role:
     name: dsu.ccdc.palo
     tasks_from: commit

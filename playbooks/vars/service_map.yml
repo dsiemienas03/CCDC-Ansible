@@ -1,20 +1,35 @@
 ---
-palo_svc:
-  esx:
-    - vmware
-    - ssl
-  dc:
-    - windc
-  dns:
-    - dns
-  ssh:
-    - ssh
-  pop:
-    - pop3
-  smtp:
-    - smtp
-  http:
-    - web-browsing
-  email:
-    - pop3
-    - smtp
+palo:
+  zones:
+    esx1:
+    esx2:
+    dc:
+  svc:
+    esx:
+      - vmware
+      - ssl
+    dc:
+      - windc
+    dns:
+      - dns
+    ssh:
+      - ssh
+    pop:
+      - pop3
+    smtp:
+      - smtp
+    http:
+      - web-browsing
+    email:
+      - pop3
+      - smtp
+
+cisco:
+  zones:
+    esx1:
+    esx2:
+    dc:
+
+fw_block:
+  - esx
+  - dc

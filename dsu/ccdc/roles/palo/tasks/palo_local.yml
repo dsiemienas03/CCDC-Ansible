@@ -7,7 +7,7 @@
     source_zone: [lan]
     source_ip: [any]
     destination_zone: ["{{ item.value.zone | default('lan') }}"]
-    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    destination_ip: ["{{ item.value.ip |  default(fw_net ~ item.key) }}"]
     application: [windc]
     action: allow
     location: before
@@ -27,7 +27,7 @@
     source_zone: [lan]
     source_ip: [any]
     destination_zone: ["{{ item.value.zone | default('lan') }}"]
-    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    destination_ip: ["{{ item.value.ip |  default(fw_net ~ item.key) }}"]
     application: [vmware, ssl]
     action: allow
     location: before
@@ -46,8 +46,8 @@
     rule_name: inbound-dc{{ item.key }}
     source_zone: [wan]
     source_ip: [any]
-    destination_zone: ["{{ ip.value.zone | default('lan') }}"]
-    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    destination_zone: ["{{ item.value.zone | default('lan') }}"]
+    destination_ip: ["{{ item.value.ip |  default(fw_net ~ item.key) }}"]
     application: [windc]
     action: deny
     group_profile: security
@@ -67,7 +67,7 @@
     source_zone: [wan]
     source_ip: [any]
     destination_zone: ["{{ ip.value.zone | default('lan') }}"]
-    destination_ip: ["{{ fw_net }}{{ item.key }}"]
+    destination_ip: ["{{ item.value.ip |  default(fw_net ~ item.key) }}"]
     application: [any]
     action: deny
     location: before
