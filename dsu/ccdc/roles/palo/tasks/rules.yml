@@ -27,8 +27,3 @@
   loop: "{{ services.palo | dict2items }}"
   loop_control:
     loop_var: host
-
-- name: rules | Commit rule changes
-  ansible.builtin.import_role:
-    name: dsu.ccdc.palo
-    tasks_from: commit

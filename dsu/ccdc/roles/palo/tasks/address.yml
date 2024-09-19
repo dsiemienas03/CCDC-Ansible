@@ -5,6 +5,20 @@
     name: lan
     value: "{{ local_mask }}"
 
+- name: address | Add Remote address
+  paloaltonetworks.panos.panos_address_object:
+    provider: "{{ provider }}"
+    name: remote
+    value: "{{ remote_mask }}"
+
+- name: address | Add ESXI address
+  when: ("esx" in item.value.svc)
+  paloaltonetworks.panos.panos_address_object:
+    provider: "{{ provider }}"
+    name: "esx{{  item.key }}"
+    value: "{{ item.value.ip |  default(fw_net ~ item.key) }}"
+  loop: "{{ services.palo | dict2items }}"
+
 - name: address | Add windows server address group
   when: ("dc" in item.value.svc)
   paloaltonetworks.panos.panos_address_group:
