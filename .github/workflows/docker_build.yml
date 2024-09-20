@@ -80,9 +80,22 @@ jobs:
         uses: docker/build-push-action@v6.7.0
         with:
           context: .
-          # push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' }}
           load: ${{ github.event_name == 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      
+      - name: Build and push Docker image
+        id: build-and-push-beta
+        uses: docker/build-push-action@v6.7.0
+        if: github.event_name == 'pull_request'
+        with:
+          context: .
+          # push: ${{ github.event_name != 'pull_request' }}
+          load: ${{ github.event_name == 'pull_request' }}
+          tags: ${{ github.branch.name}}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -109,6 +122,7 @@ jobs:
       - name: Build and push Docker image to Docker Hub
         id: build-and-push-docker
         uses: docker/build-push-action@v6.7.0
+        if: github.event_name != 'pull_request' 
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
