@@ -29,6 +29,7 @@ jobs:
       contents: read
       packages: write
       pull-requests: write
+      security-events: write
       # This is used to complete the identity challenge
       # with sigstore/fulcio when running outside of PRs.
       id-token: write
@@ -79,7 +80,7 @@ jobs:
         uses: docker/build-push-action@v6.7.0
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: true
           load: ${{ github.event_name == 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -95,6 +96,7 @@ jobs:
       - name: Extract Docker metadata
         id: meta2
         uses: docker/metadata-action@v5.5.1
+        if: github.event_name != 'pull_request'
         with:
           images: ${{ env.IMAGE_NAME }}
           tags: |
@@ -108,6 +110,7 @@ jobs:
       - name: Build and push Docker image to Docker Hub
         id: build-and-push-docker
         uses: docker/build-push-action@v6.7.0
+        if: github.event_name != 'pull_request' 
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
@@ -119,17 +122,24 @@ jobs:
 
       - name: Docker Scout
         id: docker-scout
-        if: ${{ github.event_name == 'pull_request' }}
         uses: docker/scout-action@v1
         with:
+          # command: cves,recommendations,compare
           command: compare
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:beta
+          image: ${{ steps.meta.outputs.tags }}
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
           ignore-unchanged: false
-          only-severities: critical,high,medium
           write-comment: true
           github-token: ${{ secrets.GITHUB_TOKEN }} # to be able to write the comment
-          keep-previous-comments: true
+          # sarif-file: docker-scout.sarif
+      
+      # - name: Upload analysis results to GitHub
+      #   id: upload-sarif
+      #   if: ${{ github.event_name != 'pull_request' }}
+      #   uses: github/codeql-action/upload-sarif@v3
+      #   with:
+      #     sarif_file: docker-scout.sarif
+      #     wait-for-processing: true
       
       
       # # Sign the resulting Docker image digest except on PRs.
