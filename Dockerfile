@@ -21,6 +21,17 @@ RUN set -ex ;\
     tmux ;\
     rm -rf /var/lib/apt/lists/*
 
+# Install extra python stuff cause python
+RUN set -ex ;\
+    add-apt-repository ppa:deadsnakes/ppa ;\
+    apt-get update ;\
+    apt-get install -y --no-install-recommends \
+    python3-all-venv \
+    python3.11 \
+    python3.11-venv ;\
+    apt-get purge -y --auto-remove ;\
+    rm -rf /var/lib/apt/lists/*
+
 USER ansible
 RUN set -ex ;\
     mkdir config ;\
@@ -47,6 +58,8 @@ COPY --chown=ansible:ansible .ansible.cfg .
 COPY --chown=ansible:ansible fw-setup.sh .
 COPY --chown=ansible:ansible dsu/ ./dsu/
 COPY --chown=ansible:ansible playbooks/ ./playbooks/
+COPY --chown=ansible:ansible .ansible.cfg .
+COPY --chown=ansible:ansible dsu/ ./dsu/
 
 RUN set -ex ;\
     ls -ls ;\
