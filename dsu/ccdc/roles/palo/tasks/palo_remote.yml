@@ -1,7 +1,7 @@
 - name: palo_remote | LAN to remote network
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
-    rule_name: lan-remote
+    rule_name: outbound-remote
     source_zone: [lan]
     source_ip: [any]
     destination_zone: [wan]

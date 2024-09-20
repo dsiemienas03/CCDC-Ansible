@@ -22,3 +22,10 @@
 
 - name: os_update | Wait for Online Handler
   ansible.builtin.meta: flush_handlers
+
+- name: os_update | Set os_update as done
+  ansible.builtin.set_fact:
+    palo_update_os: false
+    palo_update_other: false
+    cacheable: true
+  when: palo_update_os

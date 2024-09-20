@@ -19,11 +19,12 @@
   ansible.builtin.include_tasks: palo_local.yml
 
 - name: rules | Add remote network rules
+  when: remote_net is defined
   ansible.builtin.include_tasks: palo_remote.yml
 
 - name: rules | Add service rules
-  when: ("esx" not in host.value)
+  when: service.key not in fw_block
   ansible.builtin.include_tasks: palo_service.yml
   loop: "{{ services.palo | dict2items }}"
   loop_control:
-    loop_var: host
+    loop_var: service

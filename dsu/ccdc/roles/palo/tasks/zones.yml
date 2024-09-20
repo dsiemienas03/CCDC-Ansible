@@ -29,6 +29,7 @@
 
 # Custom zones for certian applications
 - name: zones | Config additional zones
+  when: item.value.zone is defined
   paloaltonetworks.panos.panos_zone:
     provider: "{{ provider }}"
     mode: layer2

@@ -3,7 +3,7 @@
   paloaltonetworks.panos.panos_address_object:
     provider: "{{ provider }}"
     name: lan
-    value: "{{ local_mask }}"
+    value: "{{ fw_mask }}"
 
 - name: address | Add Remote address
   paloaltonetworks.panos.panos_address_object:
@@ -42,3 +42,8 @@
     name: windows
     dynamic_value: windows
   loop: "{{ services.palo | dict2items }}"
+
+- name: address | Set initial groups to complete
+  ansible.builtin.set_fact:
+    palo_config_initial_groups: false
+    cacheable: true

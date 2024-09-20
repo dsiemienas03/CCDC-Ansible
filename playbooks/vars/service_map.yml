@@ -1,9 +1,8 @@
 ---
 palo:
   zones:
-    esx1:
-    esx2:
-    dc:
+    # ethernet1/1:
+      # zone: 1
   svc:
     esx:
       - vmware
@@ -26,9 +25,8 @@ palo:
 
 cisco:
   zones:
-    esx1:
-    esx2:
-    dc:
+    # ethernet1/1:
+      # zone: dc
 
 fw_block:
   - esx

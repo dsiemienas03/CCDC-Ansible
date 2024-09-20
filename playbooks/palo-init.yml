@@ -30,17 +30,23 @@
         msg:
           Update OS: "{{ palo_update_os }}"
           Update Other: "{{ palo_update_other }}"
-          Initial Interface: "{{ palo_config_initial_interface }}"
-          Initial Groups: "{{ palo_config_initial_groups }}"
-          Logging: "{{ palo_config_logging }}"
-          Initial Rules: "{{ palo_config_initial_rules }}"
           PANOS Version: "{{ palo_panos_version }}"
-          # IP Range: "{{ ip_range }}"
-          # Network: "{{ ip_range_mask }}"
+          FW Net: "{{ fw_mask }}"
           Wazuh: "{{ wazuh }}"
           Wazuh Port: "{{ wazuh_port }}"
+
+    - name: Print options
+      ansible.builtin.debug:
+        msg:
+          Initial Groups: "{{ palo_config_initial_groups }}"
+          Initial Interface: "{{ palo_config_initial_interface }}"
+          Logging: "{{ palo_config_logging }}"
+          Initial Rules: "{{ palo_config_initial_rules }}"
+          Initial Zones: "{{ palo_config_initial_zones }}"
     - name: Confirm config
       ansible.builtin.pause:
+
+    # Updates
     - name: Palo OS Update
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
@@ -58,13 +64,6 @@
       ansible.builtin.pause:
       when: palo_update_os or palo_update_other
 
-    - name: Set os_update as done
-      ansible.builtin.set_fact:
-        palo_update_os: false
-        palo_update_other: false
-        cacheable: true
-      when: palo_update_os
-
     # Zones
     - name: Add Zones
       ansible.builtin.import_role:
@@ -76,13 +75,6 @@
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
         tasks_from: interfaces
-      when: palo_config_initial_interface
-
-    - name: Set interfaces and zones complete
-      ansible.builtin.set_fact:
-        palo_config_initial_interface: false
-        palo_config_zones: false
-        cacheable: true
       when: palo_config_initial_interface
 
     # Objects
@@ -104,12 +96,6 @@
         tasks_from: service_group
       when: palo_config_initial_groups
 
-    - name: Set initial names completed
-      ansible.builtin.set_fact:
-        palo_config_initial_groups: false
-        cacheable: true
-      when: palo_config_initial_groups
-
     # Logging
     - name: Add logging
       ansible.builtin.import_role:
@@ -123,19 +109,14 @@
         cacheable: true
       when: palo_config_logging
 
-    # Firewall rules
-    # - name: Add CCDC firewall Rules
-    #   ansible.builtin.import_role:
-    #     name: dsu.ccdc.palo
-    #     tasks_from: palo_rules
-    #   when: palo_config_initial_rules
     - name: Add tags
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
         tasks_from: tags
       when: palo_config_initial_rules
 
-    - name: Add firewall rules
+    # Firewall rules
+    - name: Add CCDC firewall Rules
       ansible.builtin.import_role:
         name: dsu.ccdc.palo
         tasks_from: rules
