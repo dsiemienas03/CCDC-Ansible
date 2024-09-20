@@ -21,6 +21,7 @@
     location: top # Keep it this way or your life will be ruined
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
 
 - name: palo_ccdc | Outbound phone
@@ -36,7 +37,9 @@
     existing_rule: inbound-phone
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
+
 - name: palo_ccdc | Outbound CCS
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -51,7 +54,9 @@
     location: after
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
+
 - name: palo_ccdc | Outbound proxy
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -59,15 +64,17 @@
     source_zone: [any]
     source_ip: [any]
     destination_zone: [wan]
-    destination_ip: ["{{  proxy_white }}"]
-    application: [web-browsing, ssl]
+    destination_ip: ["{{ proxy_white }}"]
+    service: [service-http]
     action: allow
     location: after
     existing_rule: outbound-ccs
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
+
 - name: palo_ccdc | Outbound white team
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -83,7 +90,9 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
+
 - name: palo_ccdc | Inbound icmp
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
@@ -99,8 +108,10 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
-- name: palo_ccdc | Inbound dp
+
+- name: palo_ccdc | Inbound rdp
   paloaltonetworks.panos.panos_security_rule:
     provider: "{{ provider }}"
     rule_name: inbound-rdp
@@ -115,19 +126,5 @@
     group_profile: security
     log_start: true
     log_end: true
+    log_setting: "Loggie McLog Face"
     tag_name: [CCDC]
-- name: palo_ccdc | Temp block wan
-  paloaltonetworks.panos.panos_security_rule:
-    provider: "{{ provider }}"
-    rule_name: temp-blockWan
-    source_zone: [wan]
-    source_ip: [any]
-    destination_zone: [any]
-    destination_ip: [9.9.9.9]
-    application: [any]
-    action: deny
-    group_profile: security
-    location: after
-    existing_rule: inbound-rdp
-    log_start: true
-    log_end: true
