@@ -65,4 +65,3 @@
     if_name: "{{ item.key }}"
     gathered_filter: if_name
   loop: "{{ palo.zones | dict2items }}"
-
