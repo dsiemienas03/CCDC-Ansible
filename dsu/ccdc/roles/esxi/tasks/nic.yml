@@ -1,4 +1,4 @@
-- name: esxi_nic | Get all vm info
+- name: nic | Get all vm info
   delegate_to: localhost
   community.vmware.vmware_vm_info:
     hostname: "{{ inventory_hostname }}"
@@ -7,11 +7,11 @@
     validate_certs: false
   register: vm_info
 
-- name: esxi_nic | Print VM Info
+- name: nic | Print VM Info
   ansible.builtin.debug:
     var: vm_info
 
-- name: esxi_nic | Change NIC for VMs
+- name: nic | Change NIC for VMs
   delegate_to: localhost
   community.vmware.vmware_guest:
     hostname: "{{ inventory_hostname }}"
