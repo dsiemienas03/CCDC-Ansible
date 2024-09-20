@@ -141,7 +141,7 @@ jobs:
         with:
           # command: cves,recommendations,compare
           command: compare
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:beta
           to: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.COMPARE_TAG }}
           ignore-unchanged: false
           write-comment: true
