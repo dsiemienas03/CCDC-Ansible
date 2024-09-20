@@ -17,7 +17,8 @@ RUN set -ex ;\
     git \
     python3 \
     python3-pip \
-    vim ;\
+    vim \
+    tmux ;\
     rm -rf /var/lib/apt/lists/*
 
 # Install extra python stuff cause python
@@ -30,10 +31,6 @@ RUN set -ex ;\
     python3.11-venv ;\
     apt-get purge -y --auto-remove ;\
     rm -rf /var/lib/apt/lists/*
-
-# RUN set -ex ;\
-#     curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py ;\
-#     python3.11 get-pip.py
 
 USER ansible
 RUN set -ex ;\
@@ -48,27 +45,27 @@ RUN set -ex ;\
     chown ansible:ansible .ssh
 
 COPY --chown=ansible:ansible config/ ./config
-COPY --chown=ansible:ansible fw-setup.sh .
 
 SHELL ["/bin/bash", "-c"]
 
-RUN python3.11 -m venv .venv
 RUN set -ex ;\
-    source .venv/bin/activate ;\
     pip install --break-system-packages --no-cache-dir \
     -r config/requirements.txt ;\
-    \
     ansible-galaxy collection install \
     -r config/requirements.yml
 
+COPY --chown=ansible:ansible .ansible.cfg .
+COPY --chown=ansible:ansible fw-setup.sh .
 COPY --chown=ansible:ansible dsu/ ./dsu/
 COPY --chown=ansible:ansible playbooks/ ./playbooks/
+COPY --chown=ansible:ansible .ansible.cfg .
+COPY --chown=ansible:ansible dsu/ ./dsu/
 
 RUN set -ex ;\
     ls -ls ;\
     ansible-galaxy collection build dsu/ccdc/ ;\
     ansible-galaxy collection install --offline dsu-ccdc-1.0.0.tar.gz ;\
-    rm -rf dsu-ccdc-1.0.0.tar.gz 
+    rm -rf dsu-ccdc-1.0.0.tar.gz ;\
+    echo "force_color_prompt=yes" >> /home/ansible/.bashrc
 
 ENTRYPOINT ["top", "-b"]
-# CMD "top"
