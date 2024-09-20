@@ -51,8 +51,6 @@
     location: before
     existing_rule: tmp-block
     group_profile: security
-    location: before
-    existing_rule: tmp-block
     log_start: true
     log_end: true
     log_setting: "Loggie McLog Face"
