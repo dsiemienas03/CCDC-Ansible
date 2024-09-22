@@ -1,4 +1,4 @@
-- name: vswitch | Add a VMware vSwitch without any physical NIC attached
+- name: vswitch | Add a VMware vswitch without any physical NIC attached
   delegate_to: localhost
   community.vmware.vmware_vswitch:
     esxi_hostname: "{{ inventory_hostname }}"

@@ -25,12 +25,6 @@
     mode: layer2
     zone: clients
 
-- name: zones | Create DB zone
-  paloaltonetworks.panos.panos_zone:
-    provider: "{{ provider }}"
-    mode: layer2
-    zone: dbsrv
-
 - name: zones | Create MGT zone
   paloaltonetworks.panos.panos_zone:
     provider: "{{ provider }}"
