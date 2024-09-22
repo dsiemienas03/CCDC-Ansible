@@ -10,14 +10,14 @@
   paloaltonetworks.panos.panos_tag_object:
     provider: "{{ provider }}"
     name: BLOCK ALL
-    color: red-orange
+    color: red
     comments: Block all traffic
 
 - name: tags | Create tag object ALLOW ALL
   paloaltonetworks.panos.panos_tag_object:
     provider: "{{ provider }}"
     name: ALLOW ALL
-    color: red-orange
+    color: red
     comments: Allow all traffic
 
 - name: tags | Create tag object CCDC
@@ -61,5 +61,5 @@
 - name: tags | Create tag object Block
   paloaltonetworks.panos.panos_tag_object:
     provider: "{{ provider }}"
-    name: BLOCK
-    color: orange
+    name: Block
+    color: red-orange

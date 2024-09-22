@@ -19,7 +19,6 @@
     name: '{{ item.guest_name }}'
     state: present
     snapshot_name: "{{ lookup('pipe', 'date +%H:%M:%S---%Y-%m-%d') }}"
-    description: snap1_description
   loop: "{{ vm_info.virtual_machines | list }}"
 
 - name: snapshot | Get snapshot info
@@ -31,7 +30,6 @@
     datacenter: "{{ item.datacenter }}"
     validate_certs: false
     name: '{{ item.guest_name }}'
-    folder: "{{ item.folder }}"
   register: snapshot_info
   loop: "{{ vm_info.virtual_machines | list }}"
 

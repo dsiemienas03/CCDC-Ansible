@@ -1,0 +1,35 @@
+esxi:
+  hosts:
+    10.60.60.20:
+      esxi_password:
+    10.60.60.21:
+      esxi_password:
+  vars:
+    ansible_user: root
+    esxi_password:
+
+palo:
+  hosts:
+    10.70.70.200:
+  vars:
+    ip_address: 10.70.70.200
+    fw_net: 10.60.60.
+    api_key:
+    fw: palo1
+
+cisco:
+  hosts:
+    1.1.1.1:
+      password:
+      fw: fw2
+  vars:
+    ansible_user: admin
+    ftd_ip:
+
+
+pfsense:
+  hosts:
+    10.60.60.206:
+      ansible_user: admin
+      fw_net: 10.60.60.
+      # ansible_password: Password1!

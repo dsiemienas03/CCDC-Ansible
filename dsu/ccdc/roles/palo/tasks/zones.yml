@@ -1,44 +1,37 @@
 ---
-# Create zones
+# Default zones
 - name: zones | Create WAN zone
   paloaltonetworks.panos.panos_zone:
     provider: "{{ provider }}"
     mode: layer2
     zone: wan
+  when: palo_config_initial_zones
 
 - name: zones | Create LAN zone
   paloaltonetworks.panos.panos_zone:
     provider: "{{ provider }}"
     mode: layer2
     zone: lan
-
-# Custom zones for certian applications
-- name: zones | Create Windows zone
-  paloaltonetworks.panos.panos_zone:
-    provider: "{{ provider }}"
-    mode: layer2
-    zone: win-dc
-
-- name: zones | Create Client zone
-  paloaltonetworks.panos.panos_zone:
-    provider: "{{ provider }}"
-    mode: layer2
-    zone: clients
+  when: palo_config_initial_zones
 
 - name: zones | Create MGT zone
   paloaltonetworks.panos.panos_zone:
     provider: "{{ provider }}"
     mode: layer2
     zone: mgt
+  when: palo_config_initial_zones
 
-- name: zones | Create esx1 zone
+- name: zones | Set initial zones complete
+  ansible.builtin.set_fact:
+    palo_config_initial_zones: false
+    cacheable: true
+  when: palo_config_initial_zones
+
+# Custom zones for certian applications
+- name: zones | Config additional zones
+  when: item.value.zone is defined
   paloaltonetworks.panos.panos_zone:
     provider: "{{ provider }}"
     mode: layer2
-    zone: esx1
-
-- name: zones | Create esx2 zone
-  paloaltonetworks.panos.panos_zone:
-    provider: "{{ provider }}"
-    mode: layer2
-    zone: esx2
+    zone: "{{ item.value.zone }}"
+  loop: "{{ palo.zones | dict2items }}"

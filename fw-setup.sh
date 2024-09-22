@@ -1,15 +1,10 @@
 #!/usr/bin/env bash 
-read -p "Palo IP: " PALO_IP
-read -p "Palo PW: " PALO_PW
-read -p "Cisco FTD IP: " FTD_IP
-read -p "Cisco FMC IP: " FMC_IP
-read -p "Cisco Password: " CISCO_PW
+read -p "Palo IP: " palo_ip
+read -p "Palo PW: " palo_pw
+read -p "Cisco FTD IP: " ftd_ip
+read -p "Cisco FMC IP: " fmc_ip
+read -p "Cisco PW: " cisco_pw
 
-# sudo apt update
-# sudo apt install -y ansible-core python3-pip
-
-# sudo ansible-galaxy collection install paloaltonetworks.panos
-# pip install -r requirements.txt
 
 # ssh-keygen -t rsa -b 4096 -C "ansible@localhost" -f ~/.ssh/id_rsa -N ""
 
@@ -39,12 +34,12 @@ esxi:
 
 cisco:
   hosts:
-    $FTD_IP:
+    ${ftd_ip}:
       username: admin
-      password: {{ ADD PASSWORD HERE }}
+      password: {{ cisco_pw }}
       fw: fw2
   vars:
-    FTD_IP: $FTD_IP
+    ftd_ip: ${ftd_ip}
 EOF
 
 cat ~/.ssh/id_rsa.pub

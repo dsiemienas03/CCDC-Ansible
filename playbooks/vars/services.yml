@@ -1,24 +1,12 @@
-fw_block:
-  - esx
-  - dc
 services:
   palo:
-    20:
-      svc:
-        esx:
-    21:
-      svc:
-        esx:
-    10:
-      svc:
-        dc:
-        dns:
-      zone: esx1
-    208:
-      svc:
-        email:
-        ssh:
-    207:
-      svc:
-        ssh:
-        http:
+    esx:
+      10: "lan"
+    dc:
+      10: "lan"
+    # dns:
+    # email:
+    # ssh:
+    # http:
+    # pop:
+    # smtp:
