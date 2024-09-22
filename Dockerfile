@@ -55,6 +55,6 @@ RUN set -ex ;\
     ansible-galaxy collection build dsu/ccdc/ ;\
     ansible-galaxy collection install --offline dsu-ccdc-1.0.0.tar.gz ;\
     rm -rf dsu-ccdc-1.0.0.tar.gz ;\
-    echo "force_color_prompt=yes" >> /home/ansible/.bashrc
+    echo "force_color_prompt = yes" >> /home/ansible/.bashrc
 
 ENTRYPOINT ["top", "-b"]

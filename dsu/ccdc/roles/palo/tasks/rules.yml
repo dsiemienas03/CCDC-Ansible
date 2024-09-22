@@ -19,6 +19,7 @@
     cacheable: true
   when: palo_config_initial_rules
 
+
 - name: rules | Add local firewall Rules
   ansible.builtin.include_tasks: palo_local.yml
 
