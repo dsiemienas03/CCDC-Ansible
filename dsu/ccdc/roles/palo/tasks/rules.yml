@@ -1,6 +1,6 @@
 ---
 - name: rules | Add tags
-  ansible.builtin.include_tasks: palo_tags.yml
+  ansible.builtin.include_tasks: tags.yml
   when: palo_config_initial_rules
 
 - name: rules | Add CCDC firewall Rules

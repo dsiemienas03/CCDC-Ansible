@@ -45,9 +45,8 @@ RUN set -ex ;\
 
 COPY --chown=ansible:ansible .ansible.cfg .
 COPY --chown=ansible:ansible fw-setup.sh .
-COPY --chown=ansible:ansible dsu/ ./dsu/
-COPY --chown=ansible:ansible playbooks/ ./playbooks/
 COPY --chown=ansible:ansible .ansible.cfg .
+COPY --chown=ansible:ansible playbooks/ ./playbooks/
 COPY --chown=ansible:ansible dsu/ ./dsu/
 
 RUN set -ex ;\
